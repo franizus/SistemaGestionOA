@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" />
+<link rel="stylesheet" type="text/css" href="content.css" />
+<link rel="stylesheet" type="text/css" href="nav.css" />
+<meta http-equiv="content-type" content="text/html;  charset=utf-8" />
+<title>Patrones de Diseño en el Nivel de Componentes </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="license" type="text/html" href="http://creativecommons.org/licenses/by-sa/4.0/" />
+<meta name="generator" content="eXeLearning 2.1.3 - exelearning.net" />
+<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->
+<script type="text/javascript" src="exe_jquery.js"></script>
+<script type="text/javascript">$exe_i18n={previous:"Previous",next:"Next",show:"Show",hide:"Hide",showFeedback:"Show Feedback",hideFeedback:"Hide Feedback",correct:"Correct",incorrect:"Incorrect",menu:"Menu",download:"Download",print:"Print"}</script>
+<script type="text/javascript" src="common.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body class="exe-web-site" id="exe-node-8"><script type="text/javascript">document.body.className+=" js"</script>
+<div id="content">
+<p id="skipNav"><a href="#main" class="sr-av">Skip navigation</a></p>
+<section id="emptyHeader"></section>
+<nav id="siteNav">
+<ul>
+   <li><a href="index.html" class="daddy main-node">Inicio</a></li>
+   <li><a href="conocimientos_previos.html" class="no-ch">Conocimientos Previos</a></li>
+   <li><a href="introduccin.html" class="no-ch">Introducción</a></li>
+   <li><a href="objetivos.html" class="no-ch">Objetivos</a></li>
+   <li class="current-page-parent"><a href="contenidos.html" class="current-page-parent daddy">Contenidos</a>
+   <ul>
+      <li><a href="patrones_de_diseo.html" class="no-ch">Patrones de Diseño</a></li>
+      <li><a href="diseo_de_software_basado_en_patrones.html" class="no-ch">Diseño de Software Basado en Patrones</a></li>
+      <li><a href="patrones_arquitectnicos.html" class="no-ch">Patrones Arquitectónicos</a></li>
+      <li id="active"><a href="patrones_de_diseo_en_el_nivel_de_componentes.html" class="active no-ch">Patrones de Diseño en el Nivel de Componentes</a></li>
+      <li><a href="patrones_de_diseo_de_la_interfaz_de_usuario.html" class="no-ch">Patrones de Diseño de la Interfaz de Usuario</a></li>
+      <li><a href="patrones_de_diseo_de_webapp.html" class="no-ch">Patrones de Diseño de WebApp</a></li>
+   </ul>
+   </li>
+   <li><a href="autoevaluacin.html" class="no-ch">Autoevaluación</a></li>
+   <li><a href="resumen.html" class="no-ch">Resumen</a></li>
+   <li><a href="bibliografa.html" class="no-ch">Bibliografía</a></li>
+</ul>
+</nav>
+<div id='topPagination'>
+<nav class="pagination noprt">
+<a href="patrones_arquitectnicos.html" class="prev"><span><span>&laquo; </span>Previous</span></a> <span class="sep">| </span><a href="patrones_de_diseo_de_la_interfaz_de_usuario.html" class="next"><span>Next<span> &raquo;</span></span></a>
+</nav>
+</div>
+<div id="main-wrapper">
+<section id="main">
+<header id="nodeDecoration"><h1 id="nodeTitle">Patrones de Diseño en el Nivel de Componentes</h1></header>
+<article class="iDevice_wrapper FreeTextIdevice" id="id14">
+<div class="iDevice emphasis0">
+<div id="ta14_85" class="block iDevice_content">
+<p><span style="font-size: 12pt;">Los patrones de diseño en el nivel de componentes brindan soluciones comprobadas que se abocan a uno o más subproblemas extraídos del modelo de requerimientos. En muchos casos, los patrones de diseño de este tipo se centran en algún elemento funcional de un sistema. </span></p>
+<p><span style="font-size: 12pt;"> Por ejemplo, la aplicación CasaSeguraAsegurada.com debe resolver el siguiente subproblema de diseño: ¿Cómo pueden obtenerse especificaciones del producto e información acerca de cualquier dispositivo de CasaSegura?</span></p>
+<p><span style="font-size: 12pt;">Al investigar en varios repositorios de patrones, se encuentran los siguientes, así como el problema que resuelve cada uno:</span></p>
+<ul>
+<li><span style="font-size: 16px;"><strong>AdvancedSearch.</strong> Los usuarios deben encontrar un objeto específico en una gran colección de ellos.</span></li>
+<li><span style="font-size: 16px;"><strong>HelpWizard.</strong> Los usuarios necesitan ayuda acerca de cierto tema relacionado con el sitio web o necesitan encontrar una página específica dentro del sitio.</span></li>
+<li><span style="font-size: 16px;"><strong>SearchArea.</strong> Los usuarios deben encontrar una página.</span></li>
+<li><span style="font-size: 16px;"><strong>SearchTips.</strong> Los usuarios requieren saber cómo controlar el motor de búsqueda.</span></li>
+<li><span style="font-size: 16px;"><strong>SearchResults.</strong> Los usuarios tienen que procesar una lista de resultados de una búsqueda.</span></li>
+<li><span style="font-size: 16px;"><strong>SearchBox.</strong> Los usuarios tienen que encontrar un objeto o información específicos</span></li>
+</ul>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper CasestudyIdevice em_iDevice" id="id15">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">CasaSegura</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<section id="ta15_94" class="block iDevice_content">
+<p style="text-align: justify;"><strong>La escena:</strong> Plática informal durante el diseño de un incremento de software que implementa el control de sensores por internet para CasaSeguraAsegurada.com</p>
+<p style="text-align: justify;"><strong>Participantes:</strong> Jamie (responsable del diseño) y Vinod (arquitecto jefe del sistema de CasaSeguraAsegurada.com).</p>
+<p style="text-align: justify;"><strong>La conversación:</strong><br />Vinod: Entonces, ¿cómo va el diseño de la interfaz de control de la cámara?</p>
+<p style="text-align: justify;">Jamie: No va mal. Ya diseñé la mayoría de las capacidades para conectarla a los sensores reales sin demasiados problemas. También comencé a pensar acerca de la interfaz para que los usuarios en verdad muevan, abran y acerquen las cámaras desde una página web remota, pero no estoy seguro de haber terminado ya.</p>
+<p style="text-align: justify;">Vinod: ¿Qué es lo que tienes?</p>
+<p style="text-align: justify;">Jamie: Bueno, los requerimientos son que el control de la cámara sea muy interactivo: cuando el usuario mueva el control, la cámara debe moverse tan pronto como sea posible. Entonces, pensaba en disponer varios botones, como en una cámara normal, para que cuando el usuario controle la cámara haga clic en ellos.</p>
+<p style="text-align: justify;">Vinod: Mmm. Sí, eso funcionaría, pero no estoy seguro de que esté bien: cada vez que se haga clic en el control, se necesitará esperar para que ocurra toda la comunicación entre el cliente y el servidor, por lo que no habrá una buena percepción de retroalimentación rápida.</p>
+<p style="text-align: justify;">Jamie: Eso es lo que he pensado y por ello no estoy muy conforme con el enfoque, pero no estoy seguro de qué más hacer.</p>
+<p style="text-align: justify;">Vinod: Bueno, ¿por qué no usar el patrón ControldeDispositivoInteractivo?</p>
+<p style="text-align: justify;">Jamie: Mmm… ¿qué es eso? Nunca lo he oído.</p>
+<p style="text-align: justify;">Vinod: Básicamente es un patrón para el problema exacto que describes. La solución que propone es crear una conexión de control entre el servidor y el dispositivo, a través del cual pueden enviarse los comandos de control. De esa forma, no necesitas mandar solicitudes HTTP normales. El patrón incluso muestra cómo puedes implementar esto con el uso de algunas técnicas AJAX sencillas. En el lado del cliente tienes algunos scripts de Java que se comunican directamente con el servidor y que envían los comandos tan pronto como el usuario está sin hacer nada.</p>
+<p style="text-align: justify;">Jamie: Genial… Eso es justo lo que necesito para resolver el problema. ¿Dónde lo encuentro?</p>
+<p style="text-align: justify;">Vinod: Está disponible en un repositorio en línea. Ésta es la URL.</p>
+<p style="text-align: justify;">Jamie: Iré a revisarlo.</p>
+<p style="text-align: justify;">Vinod: Sí, pero recuerda revisar el campo de consecuencias para el patrón. Creo recordar que había algo acerca de tener cuidado con ciertos aspectos de seguridad. Pienso que es porque se crea un canal de control separado y de ese modo se evaden los mecanismos normales de seguridad de web.</p>
+<p style="text-align: justify;">Jamie: Buena observación. Es probable que no se me hubiera ocurrido… Gracias.</p>
+</section>
+<section id="taquesQuestion0b15" class="block iDevice_content">
+<p><span style="font-size: 12pt;"><strong>Con base en esto, ¿cómo el equipo de CasaSeguraAsegurada.com puede diseñar los componentes requeridos para implementar la búsqueda?</strong></span></p>
+</section>
+</div>
+</div>
+</div>
+</article>
+<div id="packageLicense" class="cc cc-by-sa">
+<p><span>Licensed under the</span> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution Share Alike License 4.0</a></p>
+</div>
+</section>
+</div>
+<div id='bottomPagination'>
+<nav class="pagination noprt">
+<a href="patrones_arquitectnicos.html" class="prev"><span><span>&laquo; </span>Previous</span></a> <span class="sep">| </span><a href="patrones_de_diseo_de_la_interfaz_de_usuario.html" class="next"><span>Next<span> &raquo;</span></span></a>
+</nav>
+</div>
+</div>
+<script type="text/javascript" src="my_js.js"></script></body></html>

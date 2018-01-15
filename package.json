@@ -1,0 +1,23 @@
+{
+  "name": "confusion",
+  "version": "1.0.0",
+  "description": "This is a website for Ristorante Con Fusion",
+  "main": "index.html",
+  "scripts": {
+    "start": "npm run lite",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lite": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.2.2"
+  },
+  "dependencies": {
+    "@danielfarrell/bootstrap-combobox": "^1.1.8",
+    "bootstrap": "^4.0.0-beta.3",
+    "bootstrap-combobox": "^1.0.2",
+    "jquery": "^3.2.1",
+    "tether": "^1.4.3"
+  }
+}
