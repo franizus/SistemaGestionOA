@@ -138,10 +138,11 @@
     </div>
 
   </nav>
-  <div class="content-wrapper">
+
+  <div class="content-wrapper">       <!-- contenedor que tiene que ser dinamico y no repetirse en las paginas desde liunea 141 hasta 244-->
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    <div class="container">
+    <div class="container">      <!-- este contanier es del cuadro de busqueda y de la tabla-->
       <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar OA..." title="Ingrese un OA">
 
       <table id="myTable">
