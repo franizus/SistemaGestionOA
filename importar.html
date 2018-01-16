@@ -143,6 +143,8 @@
                     <hr style="border-color:beige;">
 
                     <button type="button" class="btn btn-success" onclick="uploadFile()">Subir</button>
+                    <button type="button" class="btn btn-danger" onclick="javascript:location.href='index.html'">Cancelar</button>
+                    <br></br>
                     <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
                     <p id="loaded_n_total"></p>
                 </form>
@@ -211,6 +213,7 @@
                 formdata.append("autorOA", _("autorOA").value);
                 formdata.append("institucionOA", _("institucionOA").value);
                 formdata.append("palabraClaveOA", _("palabraClaveOA").value);
+                formdata.append("fechaCreacionOA", _("fechaCreacionOA").value);
                 var ajax = new XMLHttpRequest();
                 ajax.upload.addEventListener("progress", progressHandler, false);
                 ajax.addEventListener("load", completeHandler, false);

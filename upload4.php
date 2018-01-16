@@ -25,8 +25,9 @@ if(move_uploaded_file($fileTmpLoc, "oa/$fileName")){
         $descripcion = $_POST["descripcion"];
         $p_clave = $_POST["palabraClaveOA"];
         $institucion = $_POST["institucionOA"];
-        $sql = "INSERT INTO objetoaprendizaje (ruta, nombre, autor, descripcion, p_clave, institucion)
-        VALUES ('" . $ruta . "', '" . $nombre . "', '" . $autor . "', '" . $descripcion . "', '" . $p_clave . "', '" . $institucion . "')";
+        $fecha = $_POST["fechaCreacionOA"];
+        $sql = "INSERT INTO objetoaprendizaje (ruta, nombre, autor, descripcion, fecha, p_clave, institucion)
+        VALUES ('" . $ruta . "', '" . $nombre . "', '" . $autor . "', '" . $descripcion . "', '" . $fecha . "', '" . $p_clave . "', '" . $institucion . "')";
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
         } else {
