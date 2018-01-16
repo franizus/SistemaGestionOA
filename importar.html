@@ -110,27 +110,27 @@
 
                 <form role="form">
                     <div class="form-group">
-                        <input  type="text" style="width:500px" class="form-control" id="nombreOA" placeholder="Nombre del OA">
+                        <input  type="text" style="width:500px" class="form-control" id="nombreOA" placeholder="Nombre del OA" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="text" style="width:500px" class="form-control" id="descripcion" placeholder="Descripcion">
+                        <input type="text" style="width:500px" class="form-control" id="descripcion" placeholder="Descripcion" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="text"  style="width:500px" class="form-control" id="autorOA" placeholder="Autor">
+                        <input type="text"  style="width:500px" class="form-control" id="autorOA" placeholder="Autor" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="text" style="width:500px" class="form-control" id="institucionOA" placeholder="Institución">
+                        <input type="text" style="width:500px" class="form-control" id="institucionOA" placeholder="Institución" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="date" style="width:500px" class="form-control" id="fechaCreacionOA" placeholder="Fecha de creacion OA">
+                        <input type="date" style="width:500px" class="form-control" id="fechaCreacionOA" placeholder="Fecha de creacion OA" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="text" style="width:500px" class="form-control" id="palabraClaveOA" placeholder="Palabra clave OA">
+                        <input type="text" style="width:500px" class="form-control" id="palabraClaveOA" placeholder="Palabra clave OA" required>
                     </div>
 
                     <hr style="border-color:beige;">
@@ -204,25 +204,37 @@
             }
 
             function uploadFile() {
-                var file = _("file1").files[0];
-                //alert(file.name+" | "+file.size+" | "+file.type);
-                var formdata = new FormData();
-                formdata.append("file1", file);
-                formdata.append("nombreOA", _("nombreOA").value);
-                formdata.append("descripcion", _("descripcion").value);
-                formdata.append("autorOA", _("autorOA").value);
-                formdata.append("institucionOA", _("institucionOA").value);
-                formdata.append("palabraClaveOA", _("palabraClaveOA").value);
-                formdata.append("fechaCreacionOA", _("fechaCreacionOA").value);
-                var ajax = new XMLHttpRequest();
-                ajax.upload.addEventListener("progress", progressHandler, false);
-                ajax.addEventListener("load", completeHandler, false);
-                ajax.addEventListener("error", errorHandler, false);
-                ajax.addEventListener("abort", abortHandler, false);
-                ajax.open("POST", "upload4.php");
-                ajax.send(formdata);
-                alert("Objeto de Aprendizaje guardado con exito!");
-                javascript:location.href='index.html';
+
+              if(document.getElementById('nombreOA').value == '' || document.getElementById('descripcion').value == '' || document.getElementById('autorOA').value == '' ||
+                  document.getElementById('institucionOA').value == '' || document.getElementById('palabraClaveOA').value == '' || document.getElementById('fechaCreacionOA').value == ''){
+                    
+                    alert("Error uno o mas campos vacios");
+
+                }else{
+
+                  var file = _("file1").files[0];
+                  //alert(file.name+" | "+file.size+" | "+file.type);
+                  var formdata = new FormData();
+                  formdata.append("file1", file);
+                  formdata.append("nombreOA", _("nombreOA").value);
+                  formdata.append("descripcion", _("descripcion").value);
+                  formdata.append("autorOA", _("autorOA").value);
+                  formdata.append("institucionOA", _("institucionOA").value);
+                  formdata.append("palabraClaveOA", _("palabraClaveOA").value);
+                  formdata.append("fechaCreacionOA", _("fechaCreacionOA").value);
+                  var ajax = new XMLHttpRequest();
+                  ajax.upload.addEventListener("progress", progressHandler, false);
+                  ajax.addEventListener("load", completeHandler, false);
+                  ajax.addEventListener("error", errorHandler, false);
+                  ajax.addEventListener("abort", abortHandler, false);
+                  ajax.open("POST", "upload4.php");
+                  ajax.send(formdata);
+                  alert("Objeto de Aprendizaje guardado con exito!");
+                  javascript:location.href='index.html';
+
+                }
+
+
             }
 
             function progressHandler(event) {
