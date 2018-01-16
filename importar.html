@@ -221,6 +221,8 @@
                 ajax.addEventListener("abort", abortHandler, false);
                 ajax.open("POST", "upload4.php");
                 ajax.send(formdata);
+                alert("Objeto de Aprendizaje guardado con exito!");
+                javascript:location.href='index.html';
             }
 
             function progressHandler(event) {
