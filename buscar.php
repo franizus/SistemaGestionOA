@@ -211,7 +211,7 @@
             if ($row['ruta'] != '')
             {
               echo '<td>';
-              echo '<a href=' . $row['ruta'] . ' target="_blank">' . $row['nombre'] . '</a>';
+              echo '<a href="' . $row['ruta'] . '" target="_blank">' . $row['nombre'] . '</a>';
               echo '</td>';
             }
             else
@@ -242,7 +242,7 @@
             {
               echo '<button type="button" class="btn btn-success" onclick="unzip(' . "'" . $row['ruta_zip'] . "', '" . $id . "'" . ')">Descomprimir</button>';
             }
-            echo '<button type="button" class="btn btn-danger" onclick="delete(' . "'" . $id . "'" . ')">Borrar</button>';
+            echo '<button type="button" class="btn btn-danger" onclick="deleteOA(' . "'" . $id . "'" . ')">Borrar</button>';
             echo '</div>';
             echo '</div>';
           }
@@ -322,6 +322,16 @@
         }
       }
 
+      function deleteOA(id) {
+        var formdata = new FormData();
+        formdata.append("id", id);
+        var ajax = new XMLHttpRequest();
+        ajax.open("POST", "delete.php");
+        ajax.send(formdata);
+        alert("Objeto de Aprendizaje borrado con exito!");
+        javascript:location.href='buscar.php';
+      }
+
       function openModal(modale) {
         var modal = document.getElementById(modale);
         modal.style.display = "block";
@@ -334,7 +344,6 @@
       }
 
       function unzip(zip_path, id) {
-        debugger;
         var formdata = new FormData();
         formdata.append("zip_path", zip_path);
         formdata.append("id", id);
