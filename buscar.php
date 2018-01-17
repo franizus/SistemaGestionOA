@@ -225,15 +225,15 @@
             echo '</tr>';
             echo '<div id="myModal' . $id . '" class="modal">';
             echo '<div class="modal-content">';
-            echo '<p> Nombre: ' . $row['nombre'] . '</p>';
-            echo '<p> Descripcion: ' . $row['descripcion'] . '</p>';
-            echo '<p> Autor: ' . $row['autor'] . '</p>'; 
-            echo '<p> Institucion: ' . $row['institucion'] . '</p>';
-            echo '<p> Fecha de Creacion: ' . $row['fecha'] . '</p>';
-            echo '<p> Palabras Clave: ' . $row['p_clave'] . '</p>';
-            echo '<p> Tamaño: ' . $row['tamano'] . '</p>';
-            echo '<p> Tipo: ' . $row['tipo'] . '</p>';
-            echo '<p> Fecha Ingreso: ' . $row['fecha_ing'] . '</p>';
+            echo '<p> <b>Nombre:</b> ' . $row['nombre'] . '</p>';
+            echo '<p> <b>Descripcion:</b> ' . $row['descripcion'] . '</p>';
+            echo '<p> <b>Autor:</b> ' . $row['autor'] . '</p>'; 
+            echo '<p> <b>Institucion:</b> ' . $row['institucion'] . '</p>';
+            echo '<p> <b>Fecha de Creacion:</b> ' . $row['fecha'] . '</p>';
+            echo '<p> <b>Palabras Clave:</b> ' . $row['p_clave'] . '</p>';
+            echo '<p> <b>Tamaño:</b> ' . $row['tamano'] . '</p>';
+            echo '<p> <b>Tipo:</b> ' . $row['tipo'] . '</p>';
+            echo '<p> <b>Fecha Ingreso:</b> ' . $row['fecha_ing'] . '</p>';
             if ($row['ruta'] != '')
             {
               echo '<button type="button" class="btn btn-success" disabled>Descomprimir</button>';
@@ -242,6 +242,7 @@
             {
               echo '<button type="button" class="btn btn-success" onclick="unzip(' . "'" . $row['ruta_zip'] . "', '" . $id . "'" . ')">Descomprimir</button>';
             }
+            echo '<button type="button" class="btn btn-success" onclick="javascript:location.href=' . "'editaroa.php?id=" . $id . "'" . '">Editar</button>';
             echo '<button type="button" class="btn btn-danger" onclick="deleteOA(' . "'" . $id . "'" . ')">Borrar</button>';
             echo '</div>';
             echo '</div>';
@@ -252,7 +253,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
+          <small>Copyright © 2017</small>
         </div>
       </div>
     </footer>

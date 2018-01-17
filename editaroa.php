@@ -104,49 +104,38 @@
         <!-- /.content-wrapper-->
         <div class="container">
             <div class="jumbotron" style="width:570px">
-                <h2 class="display-10">Importar y Catalogar</h2>
+                <h2 class="display-10">Editar OA</h2>
 
                 <hr style="border-color:beige;">
 
                 <form role="form">
-                    <div class="form-group">
-                        <input  type="text" style="width:500px" class="form-control" id="nombreOA" placeholder="Nombre del OA" required>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea rows="3" style="width:500px" class="form-control" id="descripcion" placeholder="Descripcion" required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text"  style="width:500px" class="form-control" id="autorOA" placeholder="Autor" required>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" style="width:500px" class="form-control" id="institucionOA" placeholder="Institución" required>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="date" style="width:500px" class="form-control" id="fechaCreacionOA" placeholder="Fecha de creacion OA" required>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" style="width:500px" class="form-control" id="palabraClaveOA" placeholder="Palabra clave OA" required>
-                    </div>
-
-                    <hr style="border-color:beige;">
-
-                    <div class="form-group">
-                        <label for="ejemplo_archivo_1">Adjuntar un archivo</label>
-                        <input type="file" name="file1" id="file1">
-                    </div>
-
-                    <hr style="border-color:beige;">
-
-                    <button type="button" class="btn btn-success" onclick="uploadFile()">Subir</button>
-                    <button type="button" class="btn btn-danger" onclick="javascript:location.href='index.html'">Cancelar</button>
-                    <br></br>
-                    <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
-                    <p id="loaded_n_total"></p>
+                    <?php
+                    $myPDO = new PDO('mysql:host=localhost;dbname=sistemaoa;charset=utf8', 'root', '');
+                    $query = "SELECT nombre, descripcion, autor, institucion, DATE_FORMAT(fecha,'%Y-%m-%d') as fecha_f, p_clave FROM objetoaprendizaje WHERE id = " . $_GET["id"];
+                    $result = $myPDO->query($query);
+                    foreach ($result as $row) {
+                        echo '<div class="form-group">';
+                        echo '<input  type="text" style="width:500px" class="form-control" id="nombreOA" placeholder="Nombre del OA" required value="' . $row["nombre"] . '">';
+                        echo '</div>';
+                        echo '<div class="form-group">';
+                        echo '<textarea rows="3" style="width:500px" class="form-control" id="descripcion" placeholder="Descripcion" required>' . $row["descripcion"] . '</textarea>';
+                        echo '</div>';
+                        echo '<div class="form-group">';
+                        echo '<input type="text"  style="width:500px" class="form-control" id="autorOA" placeholder="Autor" required value="' . $row["autor"] . '">';
+                        echo '</div>';
+                        echo '<div class="form-group">';
+                        echo '<input type="text" style="width:500px" class="form-control" id="institucionOA" placeholder="Institución" required value="' . $row["institucion"] . '">';
+                        echo '</div>';
+                        echo '<div class="form-group">';
+                        echo '<input type="date" style="width:500px" class="form-control" id="fechaCreacionOA" placeholder="Fecha de creacion OA" required value="' . $row["fecha_f"] . '">';
+                        echo '</div>';
+                        echo '<div class="form-group">';
+                        echo '<input type="text" style="width:500px" class="form-control" id="palabraClaveOA" placeholder="Palabra clave OA" required value="' . $row["p_clave"] . '">';
+                        echo '</div>';
+                    }
+                    echo '<button type="button" class="btn btn-success" onclick="updateOA(' . "'" . $_GET["id"] . "'" . ')">Guardar</button>';
+                    echo '<button type="button" class="btn btn-danger" onclick="javascript:location.href=' . "'buscar.php'" . '">Cancelar</button>';
+                ?>
                 </form>
 
             </div>
@@ -198,62 +187,24 @@
         <script src="js/sb-admin-charts.min.js"></script>
 
         <script>
-            /* Script written by Miguel Nunez @ minuvasoft10.com */
             function _(el) {
                 return document.getElementById(el);
             }
 
-            function uploadFile() {
-
-              if(document.getElementById('nombreOA').value == '' || document.getElementById('descripcion').value == '' || document.getElementById('autorOA').value == '' ||
-                  document.getElementById('institucionOA').value == '' || document.getElementById('palabraClaveOA').value == '' || document.getElementById('fechaCreacionOA').value == ''){
-                    
-                    alert("Error uno o mas campos vacios");
-
-                }else{
-
-                  var file = _("file1").files[0];
-                  //alert(file.name+" | "+file.size+" | "+file.type);
-                  var formdata = new FormData();
-                  formdata.append("file1", file);
-                  formdata.append("nombreOA", _("nombreOA").value);
-                  formdata.append("descripcion", _("descripcion").value);
-                  formdata.append("autorOA", _("autorOA").value);
-                  formdata.append("institucionOA", _("institucionOA").value);
-                  formdata.append("palabraClaveOA", _("palabraClaveOA").value);
-                  formdata.append("fechaCreacionOA", _("fechaCreacionOA").value);
-                  var ajax = new XMLHttpRequest();
-                  ajax.upload.addEventListener("progress", progressHandler, false);
-                  ajax.addEventListener("load", completeHandler, false);
-                  ajax.addEventListener("error", errorHandler, false);
-                  ajax.addEventListener("abort", abortHandler, false);
-                  ajax.open("POST", "upload.php");
-                  ajax.send(formdata);
-                  alert("Objeto de Aprendizaje guardado con exito!");
-                  javascript:location.href='index.html';
-                }
-
-
-            }
-
-            function progressHandler(event) {
-                _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
-                var percent = (event.loaded / event.total) * 100;
-                _("progressBar").value = Math.round(percent);
-                _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
-            }
-
-            function completeHandler(event) {
-                _("status").innerHTML = event.target.responseText;
-                _("progressBar").value = 0;
-            }
-
-            function errorHandler(event) {
-                _("status").innerHTML = "Upload Failed";
-            }
-
-            function abortHandler(event) {
-                _("status").innerHTML = "Upload Aborted";
+            function updateOA(id) {
+                var formdata = new FormData();
+                formdata.append("id", id);
+                formdata.append("nombreOA", _("nombreOA").value);
+                formdata.append("descripcion", _("descripcion").value);
+                formdata.append("autorOA", _("autorOA").value);
+                formdata.append("institucionOA", _("institucionOA").value);
+                formdata.append("palabraClaveOA", _("palabraClaveOA").value);
+                formdata.append("fechaCreacionOA", _("fechaCreacionOA").value);
+                var ajax = new XMLHttpRequest();
+                ajax.open("POST", "update.php");
+                ajax.send(formdata);
+                alert("Objeto de Aprendizaje modificado con exito!");
+                javascript: location.href = 'buscar.php';
             }
         </script>
     </div>
