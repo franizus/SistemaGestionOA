@@ -54,6 +54,55 @@
     #myTable tr:hover {
       background-color: #f1f1f1;
     }
+
+    .modal {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Sit on top */
+      padding-top: 100px;
+      padding-left: 250px;
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.4);
+      /* Black w/ opacity */
+    }
+    /* Modal Content */
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .arrow {
+      box-sizing: border-box;
+      height: 1vw;
+      width: 1vw;
+      border-style: solid;
+      border-color: black;
+      border-width: 0px 1px 1px 0px;
+      transform: rotate(45deg);
+      transition: border-width 150ms ease-in-out;
+    }
+
+    .arrow:hover {
+      border-bottom-width: 4px;
+      border-right-width: 4px;
+    }
   </style>
 </head>
 
@@ -146,23 +195,55 @@
 
       <table id="myTable">
         <tr class="header">
-          <th style="width:35%;">Nombre</th>
+          <th style="width:30%;">Nombre</th>
           <th style="width:25%;">Autor</th>
-          <th style="width:10%;">Año</th>
-          <th style="width:30%;">P. Clave</th>
+          <th style="width:15%;">Año</th>
+          <th style="width:25%;">Palabras Clave</th>
+          <th style="width:5%;"></th>
         </tr>
         <?php
           $myPDO = new PDO('mysql:host=localhost;dbname=sistemaoa;charset=utf8', 'root', '');
           $result = $myPDO->query("SELECT * FROM objetoaprendizaje");
           foreach ($result as $row) {
+            $id = $row['id'];
             echo '<tr>';
-            echo '<td>';
-            echo '<a href=' . $row['ruta'] . ' target="_blank">' . $row['nombre'] . '</a>';
-            echo '</td>';
+            if ($row['ruta'] != '')
+            {
+              echo '<td>';
+              echo '<a href=' . $row['ruta'] . ' target="_blank">' . $row['nombre'] . '</a>';
+              echo '</td>';
+            }
+            else
+            {
+              echo '<td>' . $row['nombre'] . '</td>';
+            }
             echo '<td>' . $row['autor'] . '</td>';
-            echo '<td>' . 2017 . '</td>';
+            echo '<td>' . date("d-m-Y",strtotime($row['fecha'])) . '</td>';
             echo '<td>' . $row['p_clave'] . '</td>';
+            echo '<td> <div onclick="openModal(' . "'myModal" . $id . "'" . ')" class="arrow"></div> </td>';
             echo '</tr>';
+            echo '<div id="myModal' . $id . '" class="modal">';
+            echo '<div class="modal-content">';
+            echo '<p> Nombre: ' . $row['nombre'] . '</p>';
+            echo '<p> Descripcion: ' . $row['descripcion'] . '</p>';
+            echo '<p> Autor: ' . $row['autor'] . '</p>'; 
+            echo '<p> Institucion: ' . $row['institucion'] . '</p>';
+            echo '<p> Fecha de Creacion: ' . $row['fecha'] . '</p>';
+            echo '<p> Palabras Clave: ' . $row['p_clave'] . '</p>';
+            echo '<p> Tamaño: ' . $row['tamano'] . '</p>';
+            echo '<p> Tipo: ' . $row['tipo'] . '</p>';
+            echo '<p> Fecha Ingreso: ' . $row['fecha_ing'] . '</p>';
+            if ($row['ruta'] != '')
+            {
+              echo '<button type="button" class="btn btn-success" disabled>Descomprimir</button>';
+            }
+            else
+            {
+              echo '<button type="button" class="btn btn-success" onclick="unzip(' . "'" . $row['ruta_zip'] . "', '" . $id . "'" . ')">Descomprimir</button>';
+            }
+            echo '<button type="button" class="btn btn-danger" onclick="delete(' . "'" . $id . "'" . ')">Borrar</button>';
+            echo '</div>';
+            echo '</div>';
           }
         ?>
       </table>
@@ -238,6 +319,29 @@
             }
           }
         }
+      }
+
+      function openModal(modale) {
+        var modal = document.getElementById(modale);
+        modal.style.display = "block";
+
+        window.onclick = function (event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+      }
+
+      function unzip(zip_path, id) {
+        debugger;
+        var formdata = new FormData();
+        formdata.append("zip_path", zip_path);
+        formdata.append("id", id);
+        var ajax = new XMLHttpRequest();
+        ajax.open("POST", "unzip.php");
+        ajax.send(formdata);
+        alert("Objeto de Aprendizaje descomprimido con exito!");
+        javascript:location.href='buscar.php';
       }
     </script>
 

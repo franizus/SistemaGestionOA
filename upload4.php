@@ -9,32 +9,21 @@ if (!$fileTmpLoc) { // if file not chosen
     exit();
 }
 $name = basename($fileName,".zip");
-if(move_uploaded_file($fileTmpLoc, "oa/$fileName")){
+if(move_uploaded_file($fileTmpLoc, "zip/$fileName")){
     echo "$fileName upload is complete";
-    $zip = new ZipArchive;
-    if ($zip->open("oa/$fileName") === TRUE) {
-        $zip->extractTo("oa/$name");
-        $zip->close();
-        echo 'ok';
-        unlink("oa/$fileName");
-
-        $conn = new mysqli('localhost', 'root', '', 'sistemaoa');
-        $ruta = "oa/$name/index.html";
-        $nombre = $_POST["nombreOA"];
-        $autor = $_POST["autorOA"];
-        $descripcion = $_POST["descripcion"];
-        $p_clave = $_POST["palabraClaveOA"];
-        $institucion = $_POST["institucionOA"];
-        $fecha = $_POST["fechaCreacionOA"];
-        $sql = "INSERT INTO objetoaprendizaje (ruta, nombre, autor, descripcion, fecha, p_clave, institucion)
-        VALUES ('" . $ruta . "', '" . $nombre . "', '" . $autor . "', '" . $descripcion . "', '" . $fecha . "', '" . $p_clave . "', '" . $institucion . "')";
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+    $conn = new mysqli('localhost', 'root', '', 'sistemaoa');
+    $nombre = $_POST["nombreOA"];
+    $autor = $_POST["autorOA"];
+    $descripcion = $_POST["descripcion"];
+    $p_clave = $_POST["palabraClaveOA"];
+    $institucion = $_POST["institucionOA"];
+    $fecha = $_POST["fechaCreacionOA"];
+    $sql = "INSERT INTO objetoaprendizaje (ruta, nombre, autor, descripcion, fecha, p_clave, institucion, tamano, tipo, fecha_ing, ruta_zip)
+    VALUES ('', '" . $nombre . "', '" . $autor . "', '" . $descripcion . "', '" . $fecha . "', '" . $p_clave . "', '" . $institucion . "', '" . $fileSize  . " Bytes', 'Zip', '" . date('Y-m-d') . "', '" . $fileName . "')";
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
     } else {
-        echo 'failed';
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 } else {
     echo "move_uploaded_file function failed";
