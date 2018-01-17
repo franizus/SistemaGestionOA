@@ -3,11 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2018 at 04:11 AM
+-- Generation Time: Jan 17, 2018 at 01:14 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
-
-CREATE DATABASE sistemaoa;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -38,19 +36,23 @@ CREATE TABLE `objetoaprendizaje` (
   `descripcion` varchar(1000) CHARACTER SET utf8 NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `p_clave` varchar(200) CHARACTER SET utf8 NOT NULL,
-  `institucion` varchar(100) CHARACTER SET utf8 NOT NULL
+  `institucion` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `tamano` varchar(100) NOT NULL,
+  `tipo` varchar(10) NOT NULL,
+  `fecha_ing` date NOT NULL,
+  `ruta_zip` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `objetoaprendizaje`
 --
 
-INSERT INTO `objetoaprendizaje` (`id`, `ruta`, `nombre`, `autor`, `descripcion`, `fecha`, `p_clave`, `institucion`) VALUES
-(1, 'oa/metodos_desarrollo/index.html', 'Metodos de Desarrollo', 'Francisco Izurieta', 'Los modelos de desarrollo de software son una representaci?n abstracta de una manera en particular. Realmente no representa c?mo se debe desarrollar el software, sino de un enfoque com?n.', '2018-01-09 22:29:10', 'metodos, desarrollo', 'Escuela Politecnica Nacional'),
-(2, 'oa/patrones_diseno/index.html', 'Patrones de Diseño', 'Dario Herrera, Alexis Guerrero, Francisco Izurieta', 'En la ingeniería de software existen distintas técnicas para poder desarrollar programas funcionales. No se puede afirmar o decir cu?l es la mejor t?cnica para poder desarrollar software, ya que cada t?cnica se apega a una necesidad distinta dependiendo del desarrollador.', '2018-01-09 22:31:26', 'diseño, patrones', 'Escuela Politecnica Nacional'),
-(3, 'oa/diseno_interfaces/index.html', 'Diseño de Interfaz de Usuario', 'Francisco Izurieta', 'El diseño de la interfaz de usuario crea un medio eficaz de comunicación entre los seres humanos y la computadora.', '2018-01-09 22:32:43', 'diseño, interfaz, usuario', 'Escuela Politecnica Nacional'),
-(4, 'oa/diseno_arquitectura/index.html', 'Diseño arquitectónico del software', 'Graciela Moreno, Paola Guamani, Gabriel Macias', '', '2018-01-09 22:33:45', 'diseño, arquitectura, software', 'Escuela Politecnica Nacional'),
-(5, 'oa/diseno_componentes/index.html', 'Diseño a nivel de componentes', 'Andrea Villacis, Carlos Gutierrez', 'El diseño en el nivel de componentes define las estructuras de datos, algoritmos, caracteristicas de la interfaz y mecanismos de comunicacion asignadas a cada componente.', '2018-01-09 22:34:27', 'diseño, componentes', 'Escuela Politecnica Nacional');
+INSERT INTO `objetoaprendizaje` (`id`, `ruta`, `nombre`, `autor`, `descripcion`, `fecha`, `p_clave`, `institucion`, `tamano`, `tipo`, `fecha_ing`, `ruta_zip`) VALUES
+(1, 'oa/metodos_desarrollo/index.html', 'Metodos de Desarrollo', 'Francisco Izurieta', 'Los modelos de desarrollo de software son una representaci?n abstracta de una manera en particular. Realmente no representa c?mo se debe desarrollar el software, sino de un enfoque com?n.', '2017-12-09 22:29:10', 'metodos, desarrollo', 'Escuela Politecnica Nacional', '361575 Bytes', 'Zip', '2018-01-16', 'metodos_desarrollo.zip'),
+(2, 'oa/patrones_diseno/index.html', 'Patrones de Diseño', 'Dario Herrera, Alexis Guerrero, Francisco Izurieta', 'En la ingeniería de software existen distintas técnicas para poder desarrollar programas funcionales. No se puede afirmar o decir cu?l es la mejor t?cnica para poder desarrollar software, ya que cada t?cnica se apega a una necesidad distinta dependiendo del desarrollador.', '2018-01-09 22:31:26', 'diseño, patrones', 'Escuela Politecnica Nacional', '1367454 Bytes', 'Zip', '0000-00-00', 'patrones_diseno.zip'),
+(3, '', 'Diseño de Interfaz de Usuario', 'Francisco Izurieta', 'El diseño de la interfaz de usuario crea un medio eficaz de comunicación entre los seres humanos y la computadora.', '2018-01-09 22:32:43', 'diseño, interfaz, usuario', 'Escuela Politecnica Nacional', '958856 Bytes', 'Zip', '0000-00-00', 'diseno_interfaces.zip'),
+(4, '', 'Diseño arquitectónico del software', 'Graciela Moreno, Paola Guamani, Gabriel Macias', '', '2018-01-09 22:33:45', 'diseño, arquitectura, software', 'Escuela Politecnica Nacional', '154975 Bytes', 'Zip', '0000-00-00', 'diseno_arquitectura.zip'),
+(5, '', 'Diseño a nivel de componentes', 'Andrea Villacis, Carlos Gutierrez', 'El diseño en el nivel de componentes define las estructuras de datos, algoritmos, caracteristicas de la interfaz y mecanismos de comunicacion asignadas a cada componente.', '2018-01-09 22:34:27', 'diseño, componentes', 'Escuela Politecnica Nacional', '525129 Bytes', 'Zip', '0000-00-00', 'diseno_componentes.zip');
 
 --
 -- Indexes for dumped tables
@@ -70,7 +72,7 @@ ALTER TABLE `objetoaprendizaje`
 -- AUTO_INCREMENT for table `objetoaprendizaje`
 --
 ALTER TABLE `objetoaprendizaje`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
