@@ -120,7 +120,7 @@
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Crear">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="exe.html">
             <i class="fa fa-fw fa fa-file-text-o"></i>
             <span class="nav-link-text">Crear Objetos de Aprendizaje</span>
           </a>
