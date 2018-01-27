@@ -11,6 +11,15 @@
     require "navbar.php";
   ?>
   <div class="content-wrapper">
+    <?php 
+      if ( isset($_SESSION["success"]) ) {
+          echo('<div class="alert alert-success alert-dismissable">');
+          echo('<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>');
+          echo('<strong>Ingreso Correcto!</strong> Ahora puede usar el sistema.');
+          echo('</div>');
+          unset($_SESSION["success"]);
+      }
+    ?>
     <div class="jumbotron">
       <img src="imagenes/logoEPN.png" style="float:right; width:300px;height:300px; margin:1em">
       <h1 class="display-2">SISTEMA DE GESTIÓN DE OBJETOS DE APRENDIZAJE</h1>
@@ -23,8 +32,6 @@
       <li>Alexis Guerrero
       </ul>
     </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
     
     <?php
       require "footer.php";

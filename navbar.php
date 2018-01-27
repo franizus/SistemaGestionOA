@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.php">Sistema de Gestión de Objetos de Aprendizaje</a>
@@ -8,6 +12,9 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarResponsive">
+        <?php
+            if ( isset($_SESSION["user"]) ) {
+        ?>
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Crear">
@@ -40,7 +47,6 @@
             </li>
 
         </ul>
-
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
                 <a class="nav-link text-center" id="sidenavToggler">
@@ -48,16 +54,33 @@
                 </a>
             </li>
         </ul>
+        <?php } else { ?>
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Crear">
+                <a class="nav-link" href="login.php">
+                    <i class="fa fa-fw fa-sign-in"></i>
+                    <span class="nav-link-text">Por favor ingrese para poder usar el sistema.</span>
+                </a>
+            </li>
+
+        </ul>
+        <?php } ?>
 
         <ul class="navbar-nav ml-auto">
+            <?php
+                if ( ! isset($_SESSION["user"]) ) {
+            ?>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#">
+                <a class="nav-link" href="login.php">
                     <i class="fa fa-fw fa-sign-in"></i>Login</a>
             </li>
+            <?php } else { ?>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#">
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
                     <i class="fa fa-fw fa-sign-out"></i>Logout</a>
             </li>
+            <?php } ?>
         </ul>
 
     </div>
