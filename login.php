@@ -1,17 +1,41 @@
 <?php
+  require_once "pdo.php";
   session_start();
 
-  if ( isset($_POST["inputUser"]) && isset($_POST["inputPW"]) ) {
-    unset($_SESSION["user"]);  // Logout current user
-    if ( $_POST['inputPW'] == 'umsi' ) {
-      $_SESSION["user"] = $_POST["inputUser"];
-      $_SESSION["success"] = "Logged in.";
-      header( 'Location: index.php' ) ;
-      return;
+  if ( isset($_POST["inputUser"]) && isset($_POST["inputPW"]) && isset($_POST["userType"]) ) {
+    $sql = ' ';
+    $pwType = ' ';
+    $idType = ' ';
+    if ($_POST["userType"] == 'admin') {
+      $sql = 'SELECT * FROM administrador WHERE usuarioAdmin = :usuario';
+      $pwType = 'pwAdmin';
+      $idType = 'idAdministrador';
+    } elseif ($_POST["userType"] == 'prof') {
+      $sql = 'SELECT * FROM profesor WHERE usuarioProf = :usuario';
+      $pwType = 'pwProf';
+      $idType = 'idProfesor';
     } else {
-      $_SESSION["error"] = "Contraseña Incorrecta.";
-      header( 'Location: login.php' ) ;
-      return;
+      $sql = 'SELECT * FROM estudiante WHERE usuarioEst = :usuario';
+      $pwType = 'pwEst';
+      $idType = 'idEstudiante';
+    }
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(':usuario' => $_POST["inputUser"]));
+    if ($stmt->rowCount() > 0) {
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+      $passwd = $result[$pwType];
+      if (password_verify($_POST["inputPW"], $passwd)) {
+        $_SESSION["user"] = $_POST["inputUser"];
+        $_SESSION["userType"] = $_POST["userType"];
+        $_SESSION["userID"] = $result[$idType];
+        $_SESSION["success"] = "Logged in.";
+        header( 'Location: index.php' ) ;
+        return;
+      } else {
+        $_SESSION['error'] = 'Contraseña no coincide con el usuario ingresado.';
+      }
+    } else {
+      $_SESSION['error'] = 'Usuario no registrado.';
     }
   }
 ?>
@@ -41,12 +65,19 @@
       <div class="card-body">
         <form method="post">
           <div class="form-group">
+            <select class="form-control" id="userType" name="userType">
+              <option value="admin">Administrador</option>
+              <option value="prof">Profesor</option>
+              <option value="est">Estudiante</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="inputUser">Usuario</label>
-            <input class="form-control" id="inputUser" name="inputUser" type="text" placeholder="Ingresar Usuario">
+            <input class="form-control" id="inputUser" name="inputUser" type="text" placeholder="Ingresar Usuario" required>
           </div>
           <div class="form-group">
             <label for="inputPW">Contraseña</label>
-            <input class="form-control" id="inputPW" name="inputPW" type="password" placeholder="Ingresar Contraseña">
+            <input class="form-control" id="inputPW" name="inputPW" type="password" placeholder="Ingresar Contraseña" required>
           </div>
           <input class="btn btn-primary btn-block" type="submit" value="Log In">
           <a class="btn btn-danger btn-block" href="index.php">Cancelar</a>

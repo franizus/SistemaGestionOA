@@ -1,7 +1,3 @@
-<?php
-    session_start();
-?>
-
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.php">Sistema de Gestión de Objetos de Aprendizaje</a>
@@ -19,14 +15,14 @@
 
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Crear">
                 <a class="nav-link" href="exe.html">
-                    <i class="fa fa-fw fa fa-file-text-o"></i>
+                    <i class="fa fa-fw fa-file-text-o"></i>
                     <span class="nav-link-text">Crear Objetos de Aprendizaje</span>
                 </a>
             </li>
 
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa fa-github"></i>
+                    <i class="fa fa-fw fa-github"></i>
                     <span class="nav-link-text">Repositorio de Objetos de Aprendizaje</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
@@ -38,14 +34,16 @@
                     </li>
                 </ul>
             </li>
-
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa fa-spinner"></i>
-                    <span class="nav-link-text">...</span>
-                </a>
-            </li>
-
+            <?php
+                if ( $_SESSION["userType"] == 'admin' ) {
+            ?>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+                    <a class="nav-link" href="users.php">
+                        <i class="fa fa-fw fa-address-book"></i>
+                        <span class="nav-link-text">Usuarios</span>
+                    </a>
+                </li>
+            <?php } ?>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
