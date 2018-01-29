@@ -16,7 +16,7 @@
     }
 
     #myInput {
-        background-image: url('css/searchicon.png');
+        background-image: url('images/searchicon.png');
         background-position: 10px 10px;
         background-repeat: no-repeat;
         width: 100%;
@@ -127,12 +127,18 @@
     require "navbar.php";
   ?>
 
-  <div class="content-wrapper">       <!-- contenedor que tiene que ser dinamico y no repetirse en las paginas desde liunea 141 hasta 244-->
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <div class="container">      <!-- este contanier es del cuadro de busqueda y de la tabla-->
+  <div class="content-wrapper bg-light">
+  <?php 
+      if ( isset($_SESSION["oa"]) ) {
+        echo('<div class="alert alert-success alert-dismissable">');
+        echo('<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>');
+        echo($_SESSION["oa"]);
+        echo('</div>');
+        unset($_SESSION["oa"]);
+      }
+    ?>
+    <div class="container">
       <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar OA..." title="Ingrese un OA">
-
       <table id="myTable">
         <tr class="header">
           <th style="width:30%;">Nombre</th>
@@ -145,7 +151,12 @@
           require_once "pdo.php";
           $result = $pdo->query("SELECT * FROM objetoaprendizaje");
           foreach ($result as $row) {
-            $id = $row['id'];
+            $id = $row['idOA'];
+            $userID = false;
+            if (($_SESSION["userID"] == $row['idProfesor'] && $_SESSION["userType"] != "est") || $_SESSION["userType"] == "admin") {
+              $userID = true;
+            }
+
             echo '<tr>';
             if ($row['ruta'] != '')
             {
@@ -233,16 +244,34 @@
             echo $row['fecha_ing'];
             echo '</div>';
             echo '</div>';
-            echo '</div>';
+            echo '<div class="form-group">';
+            echo '<div class="form-row">';
+            if (!$userID) {
+              echo '<div class="col-3 offset-6">';
+            } else {
+              echo '<div class="col-3">';
+            }
             if ($row['ruta'] == '')
             {
-              echo '<button type="button" class="btn btn-warning btn-block" onclick="unzip(' . "'" . $row['ruta_zip'] . "', '" . $id . "'" . ')">Descomprimir</button>';
+              echo '<button type="button" class="btn btn-primary btn-block" onclick="unzip(' . "'" . $row['ruta_zip'] . "', '" . $id . "'" . ')">Descomprimir</button>';
             } else {
-              echo '<button type="button" class="btn btn-warning btn-block disabled">Descomprimir</button>'; 
+              echo '<button type="button" class="btn btn-primary btn-block disabled">Descomprimir</button>'; 
             }
-            echo '<a class="btn btn-info btn-block" href="zip/' . $row['ruta_zip'] . '" download>Descargar</a>'; 
-            echo '<button type="button" class="btn btn-success btn-block" onclick="javascript:location.href=' . "'editaroa.php?id=" . $id . "'" . '">Editar</button>';
-            echo '<button type="button" class="btn btn-danger btn-block" onclick="deleteOA(' . "'" . $id . "'" . ')">Borrar</button>';
+            echo '</div>';
+            echo '<div class="col-3">';
+            echo '<a class="btn btn-primary btn-block" href="zip/' . $row['ruta_zip'] . '" download>Descargar</a>';
+            echo '</div>';
+            if ($userID) {
+              echo '<div class="col-3">';
+              echo '<button type="button" class="btn btn-primary btn-block" onclick="javascript:location.href=' . "'editaroa.php?id=" . $id . "'" . '">Editar</button>';
+              echo '</div>';
+              echo '<div class="col-3">';
+              echo '<button type="button" class="btn btn-danger btn-block" onclick="deleteOA(' . "'" . $id . "'" . ')">Borrar</button>';
+              echo '</div>';
+            }
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
             echo '</div>';
             echo '</div>';
           }

@@ -1,10 +1,9 @@
 <?php
-    $id = $_POST["id"];
-    $conn = new mysqli('localhost', 'root', '', 'sistemaoa');
-    $sql = "DELETE FROM objetoaprendizaje WHERE id = " . $id;
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+    require_once "pdo.php";
+    session_start();
+
+    $sql = "DELETE FROM objetoaprendizaje WHERE idOA = :idOA";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(':idOA' => $_POST["id"]));
+    $_SESSION["oa"] = "Objeto de Aprendizaje eliminado del sistema correctamente.";
 ?>

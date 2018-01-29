@@ -23,12 +23,12 @@
           echo('</div>');
           unset($_SESSION["success"]);
       }
-      if ( isset($_SESSION["regProf"]) ) {
+      if ( isset($_SESSION["reg"]) ) {
         echo('<div class="alert alert-success alert-dismissable">');
         echo('<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>');
-        echo('<strong>Formulario enviado correctamente!</strong> ' . $_SESSION["regProf"]);
+        echo($_SESSION["reg"]);
         echo('</div>');
-        unset($_SESSION["regProf"]);
+        unset($_SESSION["reg"]);
       }
     ?>
     <div class="jumbotron">

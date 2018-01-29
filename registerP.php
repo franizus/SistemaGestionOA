@@ -13,11 +13,11 @@
       ':apellidosProf' => $_POST["apellido"],
       ':correoProf' => $_POST["correo"],
       ':idDepartamento' => $_POST["departamento"]));
-      $_SESSION["regProf"] = "El administrador le enviara su usuario y contraseña a su correo.";
-      $nameto = $_POST["nombre"] . ' ' . $_POST["apellido"];
-      sendMailA($_POST["correo"], $nameto);
-      header( 'Location: index.php' ) ;
-      return;
+    $_SESSION["reg"] = "Formulario enviado correctamente! El administrador le enviara su usuario y contraseña a su correo.";
+    $nameto = $_POST["nombre"] . ' ' . $_POST["apellido"];
+    sendMailA($_POST["correo"], $nameto);
+    header( 'Location: index.php' ) ;
+    return;
   }
 ?>
 
@@ -33,7 +33,7 @@
 <body class="bg-dark">
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Registro Profesor</div>
+      <h4 class="card-header">Registro Profesor</h4>
       <div class="card-body">
         <form method="post">
           <div class="form-group">

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,70 +9,82 @@
     <?php
         require "head.php";
     ?>
+    <style>
+        .jumbotron {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .bottom5 { 
+            margin-bottom:20px; 
+        }
+    </style>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
     <?php
         require "navbar.php";
     ?>
-    <div class="content-wrapper">
-        <!-- /.container-fluid-->
-        <!-- /.content-wrapper-->
+
+    <div class="content-wrapper bg-light">
         <div class="container">
-            <div class="jumbotron" style="width:570px">
-                <h2 class="display-10">Importar y Catalogar</h2>
-
-                <hr style="border-color:beige;">
-
-                <form role="form">
-                    <div class="form-group">
-                        <input type="text" style="width:500px" class="form-control" id="nombreOA" placeholder="Nombre del OA" required>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea rows="3" style="width:500px" class="form-control" id="descripcion" placeholder="Descripcion" required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" style="width:500px" class="form-control" id="autorOA" placeholder="Autor" required>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" style="width:500px" class="form-control" id="institucionOA" placeholder="Institución" required>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="date" style="width:500px" class="form-control" id="fechaCreacionOA" placeholder="Fecha de creacion OA" required>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" style="width:500px" class="form-control" id="palabraClaveOA" placeholder="Palabra clave OA" required>
-                    </div>
-
-                    <hr style="border-color:beige;">
-
-                    <div class="form-group">
-                        <label for="ejemplo_archivo_1">Adjuntar un archivo</label>
-                        <input type="file" name="file1" id="file1">
-                    </div>
-
-                    <hr style="border-color:beige;">
-
-                    <button type="button" class="btn btn-success" onclick="uploadFile()">Subir</button>
-                    <button type="button" class="btn btn-danger" onclick="javascript:location.href='index.html'">Cancelar</button>
-                    <br></br>
-                    <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
-                    <p id="loaded_n_total"></p>
-                </form>
-
+            <div class="jumbotron">
+                <h2 class="display-5 text-center">Importar y Catalogar</h2>
             </div>
-
         </div>
-
+        <div class="row bottom5">
+            <div class="col-6 offset-3">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post">
+                                <div class="form-group">
+                                    <label for="nombreOA">Nombre del OA</label>
+                                    <input type="text" class="form-control" id="nombreOA" placeholder="Nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcion">Descripcion</label>
+                                    <textarea rows="3" class="form-control" id="descripcion" placeholder="Descripcion" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="autorOA">Autor</label>
+                                    <input type="text" class="form-control" id="autorOA" placeholder="Autor" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="institucionOA">Institución</label>
+                                    <input type="text" class="form-control" id="institucionOA" placeholder="Institución" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fechaCreacionOA">Fecha de creacion</label>
+                                    <input type="date" class="form-control" id="fechaCreacionOA" placeholder="Fecha de creacion OA" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="palabraClaveOA">Palabras clave</label>
+                                    <input type="text" class="form-control" id="palabraClaveOA" placeholder="Palabras clave OA" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="file1">Adjuntar un archivo</label>
+                                    <input type="file" class="form-control" name="file1" id="file1" accept=".zip">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col-4 offset-4">
+                                            <button type="button" class="btn btn-danger btn-block" onclick="javascript:location.href='index.php'">Cancelar</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-success btn-block" onclick="uploadFile()">Subir</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <?php
             require "footer.php";
         ?>
-        
+
         <script src="vendor/jszip/jszip.js"></script>
         <script src="vendor/jszip/jszip-utils.js"></script>
         <script>
@@ -81,7 +97,8 @@
 
                 if (document.getElementById('nombreOA').value == '' || document.getElementById('descripcion').value ==
                     '' || document.getElementById('autorOA').value == '' ||
-                    document.getElementById('institucionOA').value == '' || document.getElementById('palabraClaveOA').value ==
+                    document.getElementById('institucionOA').value == '' || document.getElementById(
+                        'palabraClaveOA').value ==
                     '' || document.getElementById('fechaCreacionOA').value == '') {
 
                     alert("Error uno o mas campos vacios");
@@ -100,36 +117,15 @@
                     formdata.append("fechaCreacionOA", _("fechaCreacionOA").value);
                     var ajax = new XMLHttpRequest();
                     ajax.upload.addEventListener("progress", progressHandler, false);
-                    ajax.addEventListener("load", completeHandler, false);
-                    ajax.addEventListener("error", errorHandler, false);
-                    ajax.addEventListener("abort", abortHandler, false);
                     ajax.open("POST", "upload.php");
                     ajax.send(formdata);
                     alert("Objeto de Aprendizaje guardado con exito!");
-                    javascript: location.href = 'index.html';
+                    javascript: location.href = 'buscar.php';
                 }
-
-
             }
 
             function progressHandler(event) {
-                _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
-                var percent = (event.loaded / event.total) * 100;
-                _("progressBar").value = Math.round(percent);
-                _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
-            }
-
-            function completeHandler(event) {
-                _("status").innerHTML = event.target.responseText;
-                _("progressBar").value = 0;
-            }
-
-            function errorHandler(event) {
-                _("status").innerHTML = "Upload Failed";
-            }
-
-            function abortHandler(event) {
-                _("status").innerHTML = "Upload Aborted";
+                _("loaded_n_total").innerHTML = "Subidos " + event.loaded + " bytes de " + event.total;
             }
         </script>
         <script>
@@ -160,14 +156,19 @@
                                     fecha = dublincore.children[7].attributes.value.nodeValue;
                                     descripcion = dublincore.children[9].attributes.value.nodeValue;
                                     institucion = dublincore.children[17].attributes.value.nodeValue;
-                                    palabrasclave = dublincore.children[25].attributes.value.nodeValue;
+                                    palabrasclave = dublincore.children[25].attributes.value
+                                        .nodeValue;
                                     titulo = dublincore.children[27].attributes.value.nodeValue;
                                     document.getElementById("nombreOA").value = titulo;
-                                    document.getElementById("descripcion").value = descripcion;
+                                    document.getElementById("descripcion").value =
+                                        descripcion;
                                     document.getElementById("autorOA").value = autor;
-                                    document.getElementById("fechaCreacionOA").value = fecha;
-                                    document.getElementById("palabraClaveOA").value = palabrasclave;
-                                    document.getElementById("institucionOA").value = institucion;
+                                    document.getElementById("fechaCreacionOA").value =
+                                        fecha;
+                                    document.getElementById("palabraClaveOA").value =
+                                        palabrasclave;
+                                    document.getElementById("institucionOA").value =
+                                        institucion;
                                 })
                             }
                         })

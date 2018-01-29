@@ -12,23 +12,29 @@
             if ( isset($_SESSION["user"]) ) {
         ?>
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Crear">
-                <a class="nav-link" href="exe.html">
-                    <i class="fa fa-fw fa-file-text-o"></i>
-                    <span class="nav-link-text">Crear Objetos de Aprendizaje</span>
-                </a>
-            </li>
-
+            <?php
+                if ( $_SESSION["userType"] == 'prof' ) {
+            ?>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Crear">
+                    <a class="nav-link" href="exe.php">
+                        <i class="fa fa-fw fa-file-text-o"></i>
+                        <span class="nav-link-text">Crear Objetos de Aprendizaje</span>
+                    </a>
+                </li>
+            <?php } ?>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-github"></i>
                     <span class="nav-link-text">Repositorio de Objetos de Aprendizaje</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
-                    <li>
-                        <a href="importar.php">Importar y catalogar Objetos de Aprendizaje</a>
-                    </li>
+                    <?php
+                        if ( $_SESSION["userType"] == 'prof' ) {
+                    ?>
+                        <li>
+                            <a href="importar.php">Importar y catalogar Objetos de Aprendizaje</a>
+                        </li>
+                    <?php } ?>
                     <li>
                         <a href="buscar.php">Buscar Objetos de Aprendizaje</a>
                     </li>

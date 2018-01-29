@@ -95,8 +95,10 @@
             unset($_SESSION["delProf"]);
         }
     ?>
-    <div class="jumbotron">
-        <h2 class="display-5 text-center">Panel Administracion de Usuarios</h2>
+    <div class="container">
+        <div class="jumbotron">
+            <h2 class="display-5 text-center">Panel Administracion de Usuarios</h2>
+        </div>
     </div>
     <div class="row bottom5">
         <div class="col-10 offset-1">
@@ -145,13 +147,13 @@
                         echo '<form method="post">';
                         echo '<div class="form-group top5">';
                         echo '<div class="form-row">';
-                        echo '<div class="col-md-4">';
+                        echo '<div class="col-4">';
                         echo '<input class="form-control" id="usuario" name="usuario" type="text" maxlength="15" placeholder="Usuario" required>';
                         echo '</div>';
-                        echo '<div class="col-md-4">';
+                        echo '<div class="col-4">';
                         echo '<input class="form-control" id="pw" name="pw" type="text" placeholder="Contraseña" required>';
                         echo '</div>';
-                        echo '<div class="col-md-4">';
+                        echo '<div class="col-4">';
                         echo '<input type="hidden" name="nomProf" value="' . $nombre . '">';
                         echo '<input type="hidden" name="mailProf" value="' . $row['correoProf'] . '">';
                         echo '<input type="hidden" name="idProfAdd" value="' . $id . '">';
@@ -166,7 +168,7 @@
                         $counter++;
                     }
                     if (!$iterated) {
-                        echo '<div class="row bottom5">';
+                        echo '<div class="row bottom5 top5">';
                         echo '<div class="col-10 offset-1">';
                         echo '<div class="card-block">';
                         echo '<h5 class="card-title"><strong>No existen nuevos registros.</strong></h5>';
@@ -233,7 +235,7 @@
                         echo '<form method="post">';
                         echo '<div class="form-group top5">';
                         echo '<div class="form-row">';
-                        echo '<div class="col-md-4 offset-8">';
+                        echo '<div class="col-4 offset-8">';
                         echo '<input type="hidden" name="idProfDel" value="' . $id . '">';
                         echo '<input class="btn btn-danger btn-block" type="submit" value="Borrar">';
                         echo '</div>';
@@ -246,7 +248,7 @@
                         $counter++;
                     }
                     if (!$iterated) {
-                        echo '<div class="row bottom5">';
+                        echo '<div class="row bottom5 top5">';
                         echo '<div class="col-10 offset-1">';
                         echo '<div class="card-block">';
                         echo '<h5 class="card-title"><strong>No existen profesores registrados.</strong></h5>';
@@ -313,7 +315,7 @@
                         echo '<form method="post">';
                         echo '<div class="form-group top5">';
                         echo '<div class="form-row">';
-                        echo '<div class="col-md-4 offset-8">';
+                        echo '<div class="col-4 offset-8">';
                         echo '<input type="hidden" name="idEstDel" value="' . $id . '">';
                         echo '<input class="btn btn-danger btn-block" type="submit" value="Borrar">';
                         echo '</div>';
@@ -326,7 +328,7 @@
                         $counter++;
                     }
                     if (!$iterated) {
-                        echo '<div class="row bottom5">';
+                        echo '<div class="row bottom5 top5">';
                         echo '<div class="col-10 offset-1">';
                         echo '<div class="card-block">';
                         echo '<h5 class="card-title"><strong>No existen estudiantes registrados.</strong></h5>';
