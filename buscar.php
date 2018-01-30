@@ -168,7 +168,7 @@
           <th style="width:5%;"></th>
         </tr>
         <?php
-          $result = $pdo->query("SELECT * FROM objetoaprendizaje");
+          $result = $pdo->query("SELECT * FROM objetoaprendizaje oa JOIN profesor p ON oa.idProfesor = p.idProfesor");
           foreach ($result as $row) {
             $id = $row['idOA'];
             $userID = false;
@@ -267,6 +267,14 @@
             echo '</div>';
             echo '<div class="col text-justify padding15">';
             echo $row['fecha_ing'];
+            echo '</div>';
+            echo '</div>';
+            echo '<div class="row top5 bottom5">';
+            echo '<div class="col-3 text-right padding5">';
+            echo '<b>Subido por:</b>';
+            echo '</div>';
+            echo '<div class="col text-justify padding15">';
+            echo $row['nombresProf'] . ' ' . $row['apellidosProf'];
             echo '</div>';
             echo '</div>';
 
