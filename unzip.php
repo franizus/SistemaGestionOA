@@ -1,4 +1,6 @@
+
 <?php
+  ## function to unzip OA
     require_once "pdo.php";
     session_start();
 
@@ -8,7 +10,7 @@
     if ($zip->open($filepath) === TRUE) {
         $zip->extractTo("oa/$name");
         $zip->close();
-        $sql = "UPDATE objetoaprendizaje SET 
+        $sql = "UPDATE objetoaprendizaje SET
                 ruta = :ruta
                 WHERE idOA = :idOA";
         $stmt = $pdo->prepare($sql);
