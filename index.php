@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
   <?php
-    require "head.php";
+    require "head.php"; //la funcion requiere en cada script toma la funcionalidad de dicho script y lo replica en este documento. Sirve para codigo limpio
   ?>
 </head>
 
@@ -15,7 +15,7 @@
     require "navbar.php";
   ?>
   <div class="content-wrapper">
-    <?php 
+    <?php
       if ( isset($_SESSION["success"]) ) {
           echo('<div class="alert alert-success alert-dismissable">');
           echo('<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>');
@@ -43,7 +43,7 @@
       <li>Alexis Guerrero
       </ul>
     </div>
-    
+
     <?php
       require "footer.php";
     ?>
