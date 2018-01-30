@@ -1,5 +1,21 @@
 <?php
-    session_start();
+  require_once "pdo.php";
+  session_start();
+
+  if ( isset($_POST["idOAComment"]) && isset($_POST["comment"]) ) {
+    $sql = "INSERT INTO comentario (detalleComent, idOA, idProfesor)
+            VALUES (:detalleComent, :idOA, :idProfesor)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(
+      ':detalleComent' => $_POST["comment"],
+      ':idOA' => $_POST["idOAComment"],
+      ':idProfesor' => $_SESSION["userID"]));
+    $_SESSION["oa"] = "Comentario agregado correctamente.";
+    unset($_POST["idOAComment"]);
+    unset($_POST["comment"]);
+    header( 'Location: buscar.php' );
+    return;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -152,7 +168,6 @@
           <th style="width:5%;"></th>
         </tr>
         <?php
-          require_once "pdo.php";
           $result = $pdo->query("SELECT * FROM objetoaprendizaje");
           foreach ($result as $row) {
             $id = $row['idOA'];
@@ -183,8 +198,9 @@
             echo '<h4 class="modal-title">' . $row['nombre'] . '</h4>';
             echo '<button type="button" class="close" onclick="getElementById(' . "'myModal" . $id . "'" . ').style.display =' . "'none'" . ';">&times;</button>';
             echo '</div>';
+
             echo '<div class="container">';
-            echo '<hr><div class="row bottom10">';
+            echo '<div class="row top5">';
             echo '<div class="col-3">';
             echo '<b>Informacion:</b>';
             echo '</div>';
@@ -278,14 +294,14 @@
             echo '</div>';
 
             if ($_SESSION["userType"] == "prof") {
-              echo '<form class="top5">';
+              echo '<form method="post" class="top5">';
               echo '<div class="form-group">';
               echo '<textarea name="comment" placeholder="Ingrese un comentario." class="form-control"></textarea>';
               echo '</div>';
               echo '<div class="form-group">';
               echo '<div class="form-row">';
               echo '<div class="col-6 offset-6">';
-              echo '<input type="hidden" name="idProfDel" value="' . $id . '">';
+              echo '<input type="hidden" name="idOAComment" value="' . $id . '">';
               echo '<input class="btn btn-info btn-block" type="submit" value="Agregar Comentario">';
               echo '</div>';
               echo '</div>';
