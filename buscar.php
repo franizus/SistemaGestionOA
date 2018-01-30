@@ -204,7 +204,12 @@
             echo '<div class="col-3">';
             echo '<b>Informacion:</b>';
             echo '</div>';
+            echo '<div class="col-1 offset-8">';
+            echo '<div onclick="showHide(' . "'myDiv" . $id . "'" . ')" class="arrow"></div>';
             echo '</div>';
+            echo '</div>';
+
+            echo '<div id="myDiv' . $id . '">';
             echo '<div class="row top5">';
             echo '<div class="col-3 text-right padding5">';
             echo '<b>Descripcion:</b>';
@@ -277,6 +282,7 @@
             echo $row['nombresProf'] . ' ' . $row['apellidosProf'];
             echo '</div>';
             echo '</div>';
+            echo '</div>';
 
             echo '<hr><div class="row bottom10">';
             echo '<div class="col-3">';
@@ -285,10 +291,10 @@
             echo '</div>';
             echo '<div class="comments">';
             echo '<ul class="list-group">';
-            $sql = "SELECT detalleComent, nombresProf, apellidosProf 
-                    FROM comentario c 
-                    JOIN profesor p 
-                    ON p.idProfesor = c.idProfesor 
+            $sql = "SELECT detalleComent, nombresProf, apellidosProf
+                    FROM comentario c
+                    JOIN profesor p
+                    ON p.idProfesor = c.idProfesor
                     WHERE idOA = :idOA";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array(':idOA' => $id));
@@ -409,6 +415,15 @@
           if (event.target == modal) {
             modal.style.display = "none";
           }
+        }
+      }
+
+      function showHide(div) {
+        var x = document.getElementById(div);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
         }
       }
 
