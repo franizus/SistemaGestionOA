@@ -290,7 +290,8 @@
               echo '<input type="text" class="form-control" id="comentario" placeholder="Ingresa tu comentario acerca de este OA...">';
               echo '</div>';
               echo '</div>';
-              echo '<button (click)="enviarComentario()" type="button" class="btn btn-primary btn-block">Añadir Comentario</button>';
+              echo '<button type="button" class="btn btn-primary btn-block" onclick="enviarComentario()">Añadir Comentario</button>';
+
 
             }
             ##############################
@@ -383,7 +384,12 @@
       }
 
        function enviarComentario(){
-        
+         if(document.getElementById('comentario').value == ''){
+
+               alert("Debe ingresar un comentario...");
+
+           }
+
   }
 
     </script>
