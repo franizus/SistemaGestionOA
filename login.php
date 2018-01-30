@@ -6,6 +6,8 @@
     $sql = ' ';
     $pwType = ' ';
     $idType = ' ';
+    $nameType = ' ';
+    $apellidoType = ' ';
     if ($_POST["userType"] == 'admin') {
       $sql = 'SELECT * FROM administrador WHERE usuarioAdmin = :usuario';
       $pwType = 'pwAdmin';
@@ -14,10 +16,14 @@
       $sql = 'SELECT * FROM profesor WHERE usuarioProf = :usuario';
       $pwType = 'pwProf';
       $idType = 'idProfesor';
+      $nameType = 'nombresProf';
+      $apellidoType = 'apellidosProf';
     } else {
       $sql = 'SELECT * FROM estudiante WHERE usuarioEst = :usuario';
       $pwType = 'pwEst';
       $idType = 'idEstudiante';
+      $nameType = 'nombresEst';
+      $apellidoType = 'apellidosEst';
     }
     $stmt = $pdo->prepare($sql);
     $stmt->execute(array(':usuario' => $_POST["inputUser"]));
@@ -28,6 +34,7 @@
         $_SESSION["user"] = $_POST["inputUser"];
         $_SESSION["userType"] = $_POST["userType"];
         $_SESSION["userID"] = $result[$idType];
+        $_SESSION["userName"] = $result[$nameType] . ' ' . $result[$apellidoType];
         $_SESSION["success"] = "Logged in.";
         header( 'Location: index.php' ) ;
         return;

@@ -80,10 +80,22 @@
                     <i class="fa fa-fw fa-sign-in"></i>Login</a>
             </li>
             <?php } else { ?>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-            </li>
+                <li class="nav-item">
+                <a class="nav-link">
+                    <i class="fa fa-fw fa-user"></i>
+                    <?php
+                        if ( $_SESSION["userType"] == "admin" ) {
+                            echo 'Administrador';
+                        } else {
+                            echo $_SESSION["userName"];
+                        } 
+                    ?>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+                </li>
             <?php } ?>
         </ul>
 
