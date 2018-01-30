@@ -167,7 +167,6 @@
               $userID2 = true;
             }
             ######################################
-
             echo '<tr>';
             if ($row['ruta'] != '')
             {
@@ -259,8 +258,6 @@
             echo '<div class="form-row">';
 
 
-
-
             if (!$userID) {
               echo '<div class="col-3 offset-6">';
             } else {
@@ -273,17 +270,11 @@
             {
               echo '<button type="button" class="btn btn-primary btn-block" onclick="unzip(' . "'" . $row['ruta_zip'] . "', '" . $id . "'" . ')">Descomprimir</button>';
 
-              #################code add#############
-              if ($userID2) {
-                echo '<button type="button" class="btn btn-primary btn-block" id=comentario >Añadir Comentario</button>';
-              }
-              #################code add#############
+
 
 
             } else {
               echo '<button type="button" class="btn btn-primary btn-block disabled">Descomprimir</button>';
-
-
 
             }
             echo '</div>';
@@ -291,9 +282,18 @@
             echo '<a class="btn btn-primary btn-block" href="zip/' . $row['ruta_zip'] . '" download>Descargar</a>';
             echo '</div>';
 
+            #################code add#############
+            if ($userID2) {
+              echo '</div>';
+              echo '<hr style="border-color:beige;">';
+              echo '<div>';
+              echo '<input type="text" class="form-control" id="comentario" placeholder="Ingresa tu comentario acerca de este OA...">';
+              echo '</div>';
+              echo '</div>';
+              echo '<button (click)="enviarComentario()" type="button" class="btn btn-primary btn-block">Añadir Comentario</button>';
 
-
-
+            }
+            ##############################
 
             if ($userID) {
               echo '<div class="col-3">';
@@ -302,8 +302,6 @@
               echo '<div class="col-3">';
               echo '<button type="button" class="btn btn-danger btn-block" onclick="deleteOA(' . "'" . $id . "'" . ')">Borrar</button>';
               echo '</div>';
-
-
 
             }
             echo '</div>';
@@ -320,7 +318,6 @@
     <?php
       require "footer.php";
     ?>
-
 
 
     <script>
@@ -384,7 +381,14 @@
         alert("Objeto de Aprendizaje descomprimido con exito!");
         javascript:location.href='buscar.php';
       }
+
+       function enviarComentario(){
+        
+  }
+
     </script>
+
+
   </div>
 </body>
 
