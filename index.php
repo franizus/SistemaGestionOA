@@ -15,7 +15,7 @@
     require "navbar.php";
   ?>
   <div class="content-wrapper">
-    <?php
+    <?php //En esta parte el $_SESSION[] succes controla que un usuario se haya logueado correctamente
       if ( isset($_SESSION["success"]) ) {
           echo('<div class="alert alert-success alert-dismissable">');
           echo('<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>');
@@ -23,6 +23,8 @@
           echo('</div>');
           unset($_SESSION["success"]);
       }
+
+      //esta parte del codigo es el anuncia cuando un usuario se registro correctamente
       if ( isset($_SESSION["reg"]) ) {
         echo('<div class="alert alert-success alert-dismissable">');
         echo('<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>');
