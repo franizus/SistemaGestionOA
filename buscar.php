@@ -385,9 +385,7 @@
 
        function enviarComentario(){
          if(document.getElementById('comentario').value == ''){
-
                alert("Debe ingresar un comentario...");
-
            }
 
   }
