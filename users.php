@@ -6,7 +6,7 @@
     if ( isset($_POST["usuario"]) && isset($_POST["pw"]) && isset($_POST["idProfAdd"]) &&
         isset($_POST["nomProf"]) && isset($_POST["mailProf"]) ) {
         $pwd_hash = password_hash($_POST["pw"], PASSWORD_DEFAULT);
-        $sql = "UPDATE profesor SET 
+        $sql = "UPDATE profesor SET
                 usuarioProf = :usuarioProf,
                 pwProf = :pwProf
                 WHERE idProfesor = :idProfesor";
@@ -52,24 +52,24 @@
         require "head.php";
     ?>
     <style>
-        .jumbotron { 
+        .jumbotron {
             padding-top:20px;
             padding-bottom:20px;
         }
 
-        .top5 { 
-            margin-top:15px; 
+        .top5 {
+            margin-top:15px;
         }
 
-        .bottom5 { 
-            margin-bottom:20px; 
+        .bottom5 {
+            margin-bottom:20px;
         }
 
-        .padding5 { 
+        .padding5 {
             padding-right: 45px;
         }
 
-        .padding15 { 
+        .padding15 {
             padding-left: 0px;
         }
     </style>
@@ -79,7 +79,8 @@
     require "navbar.php";
   ?>
   <div class="content-wrapper bg-light">
-    <?php 
+    <?php
+        #alerts sign in session
         if ( isset($_SESSION["addProf"]) ) {
             echo('<div class="alert alert-success alert-dismissable">');
             echo('<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>');
