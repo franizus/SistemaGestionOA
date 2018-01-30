@@ -112,6 +112,10 @@
       margin-bottom:20px;
     }
 
+    .bottom10 {
+      margin-bottom:10px;
+    }
+
     .padding5 {
       padding-right: 45px;
     }
@@ -153,20 +157,10 @@
           foreach ($result as $row) {
             $id = $row['idOA'];
             $userID = false;
-
-            #################code add#############
-            $userID2 = false;
-            ######################################
-
             if (($_SESSION["userID"] == $row['idProfesor'] && $_SESSION["userType"] != "est") || $_SESSION["userType"] == "admin") {
               $userID = true;
             }
 
-            #################code add#############
-            if ($_SESSION["userType"] == "prof") {
-              $userID2 = true;
-            }
-            ######################################
             echo '<tr>';
             if ($row['ruta'] != '')
             {
@@ -190,6 +184,11 @@
             echo '<button type="button" class="close" onclick="getElementById(' . "'myModal" . $id . "'" . ').style.display =' . "'none'" . ';">&times;</button>';
             echo '</div>';
             echo '<div class="container">';
+            echo '<hr><div class="row bottom10">';
+            echo '<div class="col-3">';
+            echo '<b>Informacion:</b>';
+            echo '</div>';
+            echo '</div>';
             echo '<div class="row top5">';
             echo '<div class="col-3 text-right padding5">';
             echo '<b>Descripcion:</b>';
@@ -254,25 +253,58 @@
             echo $row['fecha_ing'];
             echo '</div>';
             echo '</div>';
+
+            echo '<hr><div class="row bottom10">';
+            echo '<div class="col-3">';
+            echo '<b>Comentarios:</b>';
+            echo '</div>';
+            echo '</div>';
+            echo '<div class="comments">';
+            echo '<ul class="list-group">';
+            $sql = "SELECT detalleComent, nombresProf, apellidosProf 
+                    FROM comentario c 
+                    JOIN profesor p 
+                    ON p.idProfesor = c.idProfesor 
+                    WHERE idOA = :idOA";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(array(':idOA' => $id));
+            foreach ($stmt as $comment) {
+              echo '<li class="list-group-item">';
+              echo '<strong>' . $comment['nombresProf'] . ' ' . $comment['apellidosProf'] . '</strong>&emsp;&emsp;&emsp;&emsp;';
+              echo $comment['detalleComent'];
+              echo '</li>';
+            }
+            echo '</ul>';
+            echo '</div>';
+
+            if ($_SESSION["userType"] == "prof") {
+              echo '<form class="top5">';
+              echo '<div class="form-group">';
+              echo '<textarea name="comment" placeholder="Ingrese un comentario." class="form-control"></textarea>';
+              echo '</div>';
+              echo '<div class="form-group">';
+              echo '<div class="form-row">';
+              echo '<div class="col-6 offset-6">';
+              echo '<input type="hidden" name="idProfDel" value="' . $id . '">';
+              echo '<input class="btn btn-info btn-block" type="submit" value="Agregar Comentario">';
+              echo '</div>';
+              echo '</div>';
+              echo '</div>';
+              echo '</form><hr>';
+            } else {
+              echo '<hr>';
+            }
+
             echo '<div class="form-group">';
             echo '<div class="form-row">';
-
-
             if (!$userID) {
               echo '<div class="col-3 offset-6">';
             } else {
               echo '<div class="col-3">';
             }
-
-
-
             if ($row['ruta'] == '')
             {
               echo '<button type="button" class="btn btn-primary btn-block" onclick="unzip(' . "'" . $row['ruta_zip'] . "', '" . $id . "'" . ')">Descomprimir</button>';
-
-
-
-
             } else {
               echo '<button type="button" class="btn btn-primary btn-block disabled">Descomprimir</button>';
 
@@ -281,21 +313,6 @@
             echo '<div class="col-3">';
             echo '<a class="btn btn-primary btn-block" href="zip/' . $row['ruta_zip'] . '" download>Descargar</a>';
             echo '</div>';
-
-            #################code add#############
-            if ($userID2) {
-              echo '</div>';
-              echo '<hr style="border-color:beige;">';
-              echo '<div>';
-              echo '<input type="text" class="form-control" id="comentario" placeholder="Ingresa tu comentario acerca de este OA...">';
-              echo '</div>';
-              echo '</div>';
-              echo '<button type="button" class="btn btn-primary btn-block" onclick="enviarComentario()">Añadir Comentario</button>';
-
-
-            }
-            ##############################
-
             if ($userID) {
               echo '<div class="col-3">';
               echo '<button type="button" class="btn btn-primary btn-block" onclick="javascript:location.href=' . "'editaroa.php?id=" . $id . "'" . '">Editar</button>';
@@ -303,7 +320,6 @@
               echo '<div class="col-3">';
               echo '<button type="button" class="btn btn-danger btn-block" onclick="deleteOA(' . "'" . $id . "'" . ')">Borrar</button>';
               echo '</div>';
-
             }
             echo '</div>';
             echo '</div>';
@@ -382,17 +398,7 @@
         alert("Objeto de Aprendizaje descomprimido con exito!");
         javascript:location.href='buscar.php';
       }
-
-       function enviarComentario(){
-         if(document.getElementById('comentario').value == ''){
-               alert("Debe ingresar un comentario...");
-           }
-
-  }
-
     </script>
-
-
   </div>
 </body>
 
