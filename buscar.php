@@ -104,19 +104,19 @@
         border-right-width: 4px;
     }
 
-    .top5 { 
-      margin-top:15px; 
+    .top5 {
+      margin-top:15px;
     }
 
-    .bottom5 { 
-      margin-bottom:20px; 
+    .bottom5 {
+      margin-bottom:20px;
     }
 
-    .padding5 { 
+    .padding5 {
       padding-right: 45px;
     }
 
-    .padding15 { 
+    .padding15 {
       padding-left: 0px;
     }
   </style>
@@ -128,7 +128,7 @@
   ?>
 
   <div class="content-wrapper bg-light">
-  <?php 
+  <?php
       if ( isset($_SESSION["oa"]) ) {
         echo('<div class="alert alert-success alert-dismissable">');
         echo('<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>');
@@ -153,9 +153,20 @@
           foreach ($result as $row) {
             $id = $row['idOA'];
             $userID = false;
+
+            #################code add#############
+            $userID2 = false;
+            ######################################
+
             if (($_SESSION["userID"] == $row['idProfesor'] && $_SESSION["userType"] != "est") || $_SESSION["userType"] == "admin") {
               $userID = true;
             }
+
+            #################code add#############
+            if ($_SESSION["userType"] == "prof") {
+              $userID2 = true;
+            }
+            ######################################
 
             echo '<tr>';
             if ($row['ruta'] != '')
@@ -246,21 +257,44 @@
             echo '</div>';
             echo '<div class="form-group">';
             echo '<div class="form-row">';
+
+
+
+
             if (!$userID) {
               echo '<div class="col-3 offset-6">';
             } else {
               echo '<div class="col-3">';
             }
+
+
+
             if ($row['ruta'] == '')
             {
               echo '<button type="button" class="btn btn-primary btn-block" onclick="unzip(' . "'" . $row['ruta_zip'] . "', '" . $id . "'" . ')">Descomprimir</button>';
+
+              #################code add#############
+              if ($userID2) {
+                echo '<button type="button" class="btn btn-primary btn-block" id=comentario >Añadir Comentario</button>';
+              }
+              #################code add#############
+
+
             } else {
-              echo '<button type="button" class="btn btn-primary btn-block disabled">Descomprimir</button>'; 
+              echo '<button type="button" class="btn btn-primary btn-block disabled">Descomprimir</button>';
+
+
+
             }
             echo '</div>';
             echo '<div class="col-3">';
             echo '<a class="btn btn-primary btn-block" href="zip/' . $row['ruta_zip'] . '" download>Descargar</a>';
             echo '</div>';
+
+
+
+
+
             if ($userID) {
               echo '<div class="col-3">';
               echo '<button type="button" class="btn btn-primary btn-block" onclick="javascript:location.href=' . "'editaroa.php?id=" . $id . "'" . '">Editar</button>';
@@ -268,20 +302,26 @@
               echo '<div class="col-3">';
               echo '<button type="button" class="btn btn-danger btn-block" onclick="deleteOA(' . "'" . $id . "'" . ')">Borrar</button>';
               echo '</div>';
+
+
+
             }
             echo '</div>';
             echo '</div>';
             echo '</div>';
             echo '</div>';
             echo '</div>';
+
           }
         ?>
       </table>
     </div>
-    
+
     <?php
       require "footer.php";
     ?>
+
+
 
     <script>
       function myFunction() {
