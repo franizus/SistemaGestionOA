@@ -63,43 +63,44 @@ INSERT INTO `carrera` (`idCarrera`, `nombreCarrera`, `idFacultad`) VALUES
 (2, 'Matemáticas', 1),
 (3, 'Ingeniería Matemática', 1),
 (4, 'Ingeniería en Ciencias Económicas y Financieras', 1),
-(5, 'Ingeniería Empresarial', 2),
-(6, 'Ingeniería de la Producción', 2),
-(7, 'Ingeniería Civil', 3),
-(8, 'Ingeniería Ambiental', 3),
-(9, 'Ingeniería Eléctrica', 4),
-(10, 'Ingeniería en Electrónica y Control', 4),
-(11, 'Ingeniería en Electrónica y Redes de Información', 4),
-(12, 'Ingeniería en Electrónica y Telecomunicaciones', 4),
-(13, 'Ingeniería en Geología\r\n', 5),
-(14, 'Ingeniería en Petróleos', 5),
-(15, 'Ingenieria Mecanica', 6),
-(16, 'Ingeniería Agroindustrial', 7),
-(17, 'Ingeniería Química', 7),
-(18, 'Ingeniería en Software', 8),
-(19, 'Ingeniería en Computación', 8),
-(20, 'Ingeniería en Sistemas Informaticos y de Computacion', 8),
-(21, 'Tecnología en Electrónica y Telecomunicaciones', 9),
-(22, 'Tecnología en Análisis de Sistemas Informáticos', 9),
-(23, 'Tecnología en Electromecánica', 9),
-(24, 'Tecnología en Agua y Saneamiento Ambiental', 9),
-(25, 'Maestría en Física', 1),
-(26, 'Maestría en Sistemas de Gestión Integrados', 2),
-(27, 'Maestría en Gestión de Talento Humano', 2),
-(28, 'Maestría en Ciencias de Ingeniería Eléctrica', 4),
-(29, 'Maestría en Conectividad y Redes de Telecomunicaciones', 4),
-(30, 'Maestría en Automatización y Control Electrónico Industrial', 4),
-(31, 'Maestría en Administración de Negocios Eléctricos', 4),
-(32, 'Maestría en Ingeniería Eléctrica en Distribución', 4),
-(33, 'Maestría en Redes Eléctricas Inteligentes', 4),
-(34, 'Maestria en Mecatronica y Robotica', 6),
-(35, 'Maestria en Sistemas Automotrices', 6),
-(36, 'Maestria en Diseño y Simulacion', 6),
-(37, 'Programa Doctoral en Ciencias de la Mecanica', 6),
-(38, 'Maestría y Especialista en Gestión de las Comunicaciones y Tecnología de la Información', 8),
-(39, 'Maestría en Ciencias de la Computación', 8),
-(40, 'Maestría en Sistemas de Información', 8),
-(41, 'Doctorado en Informática', 8);
+(5, 'Maestría en Física', 1),
+(6, 'Ingeniería Empresarial', 2),
+(7, 'Ingeniería de la Producción', 2),
+(8, 'Maestría en Sistemas de Gestión Integrados', 2),
+(9, 'Maestría en Gestión de Talento Humano', 2),
+(10, 'Ingeniería Civil', 3),
+(11, 'Ingeniería Ambiental', 3),
+(12, 'Ingeniería Eléctrica', 4),
+(13, 'Ingeniería en Electrónica y Control', 4),
+(14, 'Ingeniería en Electrónica y Redes de Información', 4),
+(15, 'Ingeniería en Electrónica y Telecomunicaciones', 4),
+(16, 'Maestría en Ciencias de Ingeniería Eléctrica', 4),
+(17, 'Maestría en Conectividad y Redes de Telecomunicaciones', 4),
+(18, 'Maestría en Automatización y Control Electrónico Industrial', 4),
+(19, 'Maestría en Administración de Negocios Eléctricos', 4),
+(20, 'Maestría en Ingeniería Eléctrica en Distribución', 4),
+(21, 'Maestría en Redes Eléctricas Inteligentes', 4),
+(22, 'Ingeniería en Geología', 5),
+(23, 'Ingeniería en Petróleos', 5),
+(24, 'Ingenieria Mecanica', 6),
+(25, 'Maestria en Mecatronica y Robotica', 6),
+(26, 'Maestria en Sistemas Automotrices', 6),
+(27, 'Maestria en Diseño y Simulacion', 6),
+(28, 'Programa Doctoral en Ciencias de la Mecanica', 6),
+(29, 'Ingeniería Agroindustrial', 7),
+(30, 'Ingeniería Química', 7),
+(31, 'Ingeniería en Software', 8),
+(32, 'Ingeniería en Computación', 8),
+(33, 'Ingeniería en Sistemas Informaticos y de Computacion', 8),
+(34, 'Maestría y Especialista en Gestión de las Comunicaciones y Tecnología de la Información', 8),
+(35, 'Maestría en Ciencias de la Computación', 8),
+(36, 'Maestría en Sistemas de Información', 8),
+(37, 'Doctorado en Informática', 8),
+(38, 'Tecnología en Electrónica y Telecomunicaciones', 9),
+(39, 'Tecnología en Análisis de Sistemas Informáticos', 9),
+(40, 'Tecnología en Electromecánica', 9),
+(41, 'Tecnología en Agua y Saneamiento Ambiental', 9);
+
 
 -- --------------------------------------------------------
 
@@ -113,6 +114,13 @@ CREATE TABLE `comentario` (
   `idOA` int(11) NOT NULL,
   `idProfesor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `comentario`
+--
+
+INSERT INTO `comentario` (`idComentario`, `detalleComent`, `idOA`, `idProfesor`) VALUES
+(1, 'Muy buen Objeto de Aprendizaje', 2, 8);
 
 -- --------------------------------------------------------
 
@@ -169,12 +177,6 @@ CREATE TABLE `estudiante` (
   `pwEst` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `estudiante`
---
-
-INSERT INTO `estudiante` (`idEstudiante`, `cedulaEst`, `nombresEst`, `apellidosEst`, `correoEst`, `idCarrera`, `usuarioEst`, `pwEst`) VALUES
-(2, '1231231232', 'Fran', 'Iz', 'asdad@sc.com', 20, 'fraz', '$2y$10$VW9..wJnd7Gk12zKoqVDdeuh2XBJlqrW5NChxLdmqMsaIyB1OdsUS');
 
 -- --------------------------------------------------------
 
@@ -254,8 +256,8 @@ CREATE TABLE `profesor` (
 --
 
 INSERT INTO `profesor` (`idProfesor`, `cedulaProf`, `nombresProf`, `apellidosProf`, `correoProf`, `idDepartamento`, `usuarioProf`, `pwProf`) VALUES
-(3, '', 'adsa', 'asdas', 'hawupux@69postix.info', 6, 'a', '$2y$10$5Mc0tltLELeaaq/2O9E.1.5A94dnSJPPGaI/uKxd6B8sRSoQREMAi'),
-(6, '1231231231', 'Francisco ', 'Izurieta', 'franizus@live.com', 17, 'frna', '');
+(8, '1723124564', 'Dario', 'Herrera', 'daro.wla@hotmail.es', 17, 'dario', '$2y$10$giPwvmBfUslrQRrpcjgEGOXpM5iQttdUozUCJG8Bad7aCbHbASIju'),
+(10, '1725290343', 'Alexis', 'Guerrero', 'alexis.guerrero@epn.edu.ec', 19, 'alexis', '$2y$10$uQwP186XWpADxNAt/iC18e7Ku/WfiTsICuc5lySuOPb2lMD27X94u');
 
 --
 -- Indexes for dumped tables
@@ -368,48 +370,3 @@ ALTER TABLE `objetoaprendizaje`
 ALTER TABLE `profesor`
   MODIFY `idProfesor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `carrera`
---
-ALTER TABLE `carrera`
-  ADD CONSTRAINT `carrera_ibfk_1` FOREIGN KEY (`idFacultad`) REFERENCES `facultad` (`idFacultad`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `comentario`
---
-ALTER TABLE `comentario`
-  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`idComentario`) REFERENCES `objetoaprendizaje` (`idOA`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`idProfesor`) REFERENCES `profesor` (`idProfesor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `departamento`
---
-ALTER TABLE `departamento`
-  ADD CONSTRAINT `departamento_ibfk_1` FOREIGN KEY (`idFacultad`) REFERENCES `facultad` (`idFacultad`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `estudiante`
---
-ALTER TABLE `estudiante`
-  ADD CONSTRAINT `estudiante_ibfk_1` FOREIGN KEY (`idCarrera`) REFERENCES `carrera` (`idCarrera`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `objetoaprendizaje`
---
-ALTER TABLE `objetoaprendizaje`
-  ADD CONSTRAINT `objetoaprendizaje_ibfk_1` FOREIGN KEY (`idProfesor`) REFERENCES `profesor` (`idProfesor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `profesor`
---
-ALTER TABLE `profesor`
-  ADD CONSTRAINT `profesor_ibfk_1` FOREIGN KEY (`idDepartamento`) REFERENCES `departamento` (`idDepartamento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
