@@ -298,11 +298,14 @@
                     WHERE idOA = :idOA";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(array(':idOA' => $id));
-            foreach ($stmt as $comment) {
-              echo '<li class="list-group-item">';
-              echo '<strong>' . $comment['nombresProf'] . ' ' . $comment['apellidosProf'] . '</strong>&emsp;&emsp;&emsp;&emsp;';
-              echo $comment['detalleComent'];
-              echo '</li>';
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($result) {
+              foreach ($result as $comment) {
+                echo '<li class="list-group-item">';
+                echo '<strong>' . $comment['nombresProf'] . ' ' . $comment['apellidosProf'] . '</strong>&emsp;&emsp;&emsp;&emsp;';
+                echo $comment['detalleComent'];
+                echo '</li>';
+              }
             }
             echo '</ul>';
             echo '</div>';
