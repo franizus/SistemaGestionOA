@@ -34,7 +34,9 @@
         $_SESSION["user"] = $_POST["inputUser"];
         $_SESSION["userType"] = $_POST["userType"];
         $_SESSION["userID"] = $result[$idType];
-        $_SESSION["userName"] = $result[$nameType] . ' ' . $result[$apellidoType];
+        if ($_POST["userType"] != 'admin') {
+          $_SESSION["userName"] = $result[$nameType] . ' ' . $result[$apellidoType];
+        }
         $_SESSION["success"] = "Logged in.";
         header( 'Location: index.php' ) ;
         return;

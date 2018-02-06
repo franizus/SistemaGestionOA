@@ -1,5 +1,6 @@
 <?php
   require_once "pdo.php";
+  require_once "delete.php";
   session_start();
 
   if ( isset($_POST["idOAComment"]) && isset($_POST["comment"]) ) {
@@ -13,6 +14,15 @@
     $_SESSION["oa"] = "Comentario agregado correctamente.";
     unset($_POST["idOAComment"]);
     unset($_POST["comment"]);
+    header( 'Location: buscar.php' );
+    return;
+  }
+
+  if ( isset($_POST["idOADelete"]) && isset($_POST["idOARuta"]) ) {
+    deleteOA($_POST["idOARuta"], $_POST["idOADelete"]);
+    $_SESSION["oa"] = "Objeto de Aprendizaje eliminado del sistema correctamente.";
+    unset($_POST["idOADelete"]);
+    unset($_POST["idOARuta"]);
     header( 'Location: buscar.php' );
     return;
   }
@@ -348,7 +358,11 @@
               echo '<button type="button" class="btn btn-primary btn-block" onclick="javascript:location.href=' . "'editaroa.php?id=" . $id . "'" . '">Editar</button>';
               echo '</div>';
               echo '<div class="col-3">';
-              echo '<button type="button" class="btn btn-danger btn-block" onclick="deleteOA(' . "'" . $id . "', '" . $row['ruta_zip'] . "'" . ')">Borrar</button>';
+              echo '<form method="post">';
+              echo '<input type="hidden" name="idOADelete" value="' . $id . '">';
+              echo '<input type="hidden" name="idOARuta" value="' . $row['ruta_zip'] . '">';
+              echo '<input class="btn btn-danger btn-block" type="submit" value="Borrar">';
+              echo '</form>';
               echo '</div>';
             }
             echo '</div>';
@@ -392,19 +406,6 @@
               tr[i].style.display = "none";
             }
           }
-        }
-      }
-
-      function deleteOA(id, zipRoute) {
-        var r = confirm("Seguro desea eliminar el OA?");
-        if (r == true) {
-          var formdata = new FormData();
-          formdata.append("id", id);
-          formdata.append("ruta_zip", zipRoute);
-          var ajax = new XMLHttpRequest();
-          ajax.open("POST", "delete.php");
-          ajax.send(formdata);
-          javascript:location.href='buscar.php';
         }
       }
 
