@@ -1,6 +1,7 @@
 <?php
     require_once "pdo.php";
     require_once "mail.php";
+    require_once "delete.php";
     session_start();
 
     if ( isset($_POST["usuario"]) && isset($_POST["pw"]) && isset($_POST["idProfAdd"]) &&
@@ -26,6 +27,13 @@
         return;
     }
     if ( isset($_POST["idProfDel"]) ) {
+        $sql = "SELECT idOA, ruta_zip FROM objetoaprendizaje WHERE idProfesor = :idProfesor";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array(':idProfesor' => $_POST["idProfDel"]));
+        foreach ($stmt as $oa) {
+            deleteOA($oa['ruta_zip'], $oa['idOA']);
+        }
+
         $sql = "DELETE FROM profesor WHERE idProfesor = :idProfesor";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(':idProfesor' => $_POST["idProfDel"]));
