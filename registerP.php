@@ -1,23 +1,27 @@
 <?php
   require_once "pdo.php";
   require_once "mail.php";
+  require_once "cedula.php";
   session_start();
   if ( isset($_POST["cedula"]) && isset($_POST["nombre"]) && isset($_POST["apellido"])
     && isset($_POST["correo"]) && isset($_POST["departamento"]) ) {
-    $sql = "INSERT INTO profesor (cedulaProf, nombresProf, apellidosProf, correoProf, idDepartamento)
-            VALUES (:cedulaProf, :nombresProf, :apellidosProf, :correoProf, :idDepartamento)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(
+    if (validarCedula($_POST["cedula"])) 
+    {
+      $sql = "INSERT INTO profesor (cedulaProf, nombresProf, apellidosProf, correoProf, idDepartamento)
+      VALUES (:cedulaProf, :nombresProf, :apellidosProf, :correoProf, :idDepartamento)";
+      $stmt = $pdo->prepare($sql);
+      $stmt->execute(array(
       ':cedulaProf' => $_POST["cedula"],
       ':nombresProf' => $_POST["nombre"],
       ':apellidosProf' => $_POST["apellido"],
       ':correoProf' => $_POST["correo"],
       ':idDepartamento' => $_POST["departamento"]));
-    $_SESSION["reg"] = "Formulario enviado correctamente! El administrador le enviara su usuario y contraseña a su correo.";
-    $nameto = $_POST["nombre"] . ' ' . $_POST["apellido"];
-    sendMailA($_POST["correo"], $nameto);
-    header( 'Location: index.php' ) ;
-    return;
+      $_SESSION["reg"] = "Formulario enviado correctamente! El administrador le enviara su usuario y contraseña a su correo.";
+      $nameto = $_POST["nombre"] . ' ' . $_POST["apellido"];
+      sendMailA($_POST["correo"], $nameto);
+      header( 'Location: index.php' ) ;
+      return;
+    }
   }
 ?>
 
@@ -32,6 +36,15 @@
 
 <body class="bg-dark">
   <div class="container">
+    <?php
+      if ( isset($_SESSION["errorRE"]) ) {
+        echo('<div class="alert alert-danger alert-dismissable">');
+        echo('<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>');
+        echo('<strong>Error! </strong>' . $_SESSION["errorRE"]);
+        echo('</div>');
+        unset($_SESSION["errorRE"]);
+      }
+    ?>
     <div class="card card-register mx-auto mt-5">
       <h4 class="card-header">Registro Profesor</h4>
       <div class="card-body">

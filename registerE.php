@@ -1,30 +1,32 @@
 <?php
   require_once "pdo.php";
   require_once "mail.php";
+  require_once "cedula.php";
   session_start();
   if ( isset($_POST["cedula"]) && isset($_POST["nombre"]) && isset($_POST["apellido"]) && isset($_POST["usuario"])
     && isset($_POST["correo"]) && isset($_POST["carrera"]) && isset($_POST["pw"]) && isset($_POST["pwConf"]) ) {
     if ($_POST["pw"] == $_POST["pwConf"]) {
-      $pwd_hash = password_hash($_POST["pw"], PASSWORD_DEFAULT);
-      $sql = "INSERT INTO estudiante (cedulaEst, nombresEst, apellidosEst, correoEst, idCarrera, usuarioEst, pwEst)
-            VALUES (:cedulaEst, :nombresEst, :apellidosEst, :correoEst, :idCarrera, :usuarioEst, :pwEst)";
-      $stmt = $pdo->prepare($sql);
-      $stmt->execute(array(
-        ':cedulaEst' => $_POST["cedula"],
-        ':nombresEst' => $_POST["nombre"],
-        ':apellidosEst' => $_POST["apellido"],
-        ':correoEst' => $_POST["correo"],
-        ':idCarrera' => $_POST["carrera"],
-        ':usuarioEst' => $_POST["usuario"],
-        ':pwEst' => $pwd_hash));
-      $_SESSION["reg"] = "Usuario estudiante creado correctamente.";
-      header( 'Location: index.php' ) ;
-      return;
+      if (validarCedula($_POST["cedula"])) 
+      {
+        $pwd_hash = password_hash($_POST["pw"], PASSWORD_DEFAULT);
+        $sql = "INSERT INTO estudiante (cedulaEst, nombresEst, apellidosEst, correoEst, idCarrera, usuarioEst, pwEst)
+              VALUES (:cedulaEst, :nombresEst, :apellidosEst, :correoEst, :idCarrera, :usuarioEst, :pwEst)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array(
+          ':cedulaEst' => $_POST["cedula"],
+          ':nombresEst' => $_POST["nombre"],
+          ':apellidosEst' => $_POST["apellido"],
+          ':correoEst' => $_POST["correo"],
+          ':idCarrera' => $_POST["carrera"],
+          ':usuarioEst' => $_POST["usuario"],
+          ':pwEst' => $pwd_hash));
+        $_SESSION["reg"] = "Usuario estudiante creado correctamente.";
+        header( 'Location: index.php' ) ;
+        return;
+      }
     } else {
       $_SESSION['errorRE'] = 'Contraseñas no coinciden.';
     }
-    
-    
   }
 ?>
 
