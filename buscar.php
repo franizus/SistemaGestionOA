@@ -348,7 +348,7 @@
               echo '<button type="button" class="btn btn-primary btn-block" onclick="javascript:location.href=' . "'editaroa.php?id=" . $id . "'" . '">Editar</button>';
               echo '</div>';
               echo '<div class="col-3">';
-              echo '<button type="button" class="btn btn-danger btn-block" onclick="deleteOA(' . "'" . $id . "'" . ')">Borrar</button>';
+              echo '<button type="button" class="btn btn-danger btn-block" onclick="deleteOA(' . "'" . $id . "', '" . $row['ruta_zip'] . "'" . ')">Borrar</button>';
               echo '</div>';
             }
             echo '</div>';
@@ -395,11 +395,12 @@
         }
       }
 
-      function deleteOA(id) {
+      function deleteOA(id, zipRoute) {
         var r = confirm("Seguro desea eliminar el OA?");
         if (r == true) {
           var formdata = new FormData();
           formdata.append("id", id);
+          formdata.append("ruta_zip", zipRoute);
           var ajax = new XMLHttpRequest();
           ajax.open("POST", "delete.php");
           ajax.send(formdata);
