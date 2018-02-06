@@ -81,7 +81,7 @@
             </li>
             <?php } else { ?>
                 <li class="nav-item">
-                <a class="nav-link">
+                <a class="nav-link" href="userprof.php">
                     <i class="fa fa-fw fa-user"></i>
                     <?php
                         if ( $_SESSION["userType"] == "admin" ) {
