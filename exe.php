@@ -17,7 +17,7 @@
   ?>
   <div class="content-wrapper">
     <div>
-      <object type="text/html" data="http://localhost:51235/newPackage" width="100%" height="580px">
+      <object type="text/html" data="https://79b2e6da.ngrok.io" width="100%" height="580px">
       </object>
     </div>
     <?php
