@@ -137,8 +137,10 @@
 
                 JSZip.loadAsync(file) // 1) read the Blob
                     .then(function (zip) {
+                        var temp = true;
                         Object.keys(zip.files).forEach(function (filename) {
                             if (filename == "contentv3.xml") {
+                                temp = false;
                                 zip.files[filename].async('string').then(function (fileData) {
                                     console.log(fileData) // These are your file contents      
                                     parser = new DOMParser();
@@ -172,6 +174,9 @@
                                 })
                             }
                         })
+                        if (temp) {
+                            alert("Error el objeto no fue creado con exeLearning");
+                        }
                     });
             }
         </script>
