@@ -3,7 +3,7 @@
     require_once "delete_files.php";
 
     session_start();
-    $target = $_SESSION["userID"] . '-' . $_SESSION["userType"] . '/';
+    $target = 'oa/' . $_SESSION["userID"] . '-' . $_SESSION["userType"] . '/';
     delete_files($target);
     $sql = "DELETE FROM rutaoa WHERE idUser = :idUser AND username = :userName";
     $stmt = $pdo->prepare($sql);
