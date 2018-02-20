@@ -1,5 +1,9 @@
 # Sistema de Gestion de Objetos de Aprendizaje
 
+El Sistema OA es una herramienta diseñada para crear y gestionar objetos de aprendizaje de manera interactiva. Y se puede acceder desde el siguiente enlace:
+
+[http://sistema-oa.rf.gd](http://sistema-oa.rf.gd)
+
 ## Primeros pasos
 
 ### Prerrequisitos
@@ -40,7 +44,7 @@ http://localhost/sistemaoa/index.php
 
 ### Habilitacion de la base de datos
 
-Para que el sistema funcione correctamente se debe crear la base de datos `sistemaoa` en su computador. El script para la creacion de la base de datos se encuentra en el archivo `sistemaoa.sql`.
+Para que el sistema funcione correctamente se debe crear la base de datos `sistemaoa` en su computador. El script para la creacion de la base de datos se encuentra en el archivo `sistemaoa.sql`.http://ohmyz.sh/
 
 Para conectar el sistema con la base de datos que acaba de modificar el archivo `pdo.php.example`. Para esto se debe quitar la extension `.example` del archivo y modificar el contenido agregando `root` como usuario de la base de datos y vacio para la contraseña.
 
