@@ -3,7 +3,7 @@
     require_once "delete_files.php";
 
     function deleteOA($filename, $idOA) {
-        $name = basename($filename,".zip"); 
+        $name = basename($filename,".zip");
         $target = 'oa/' . $name . '/';
         delete_files($target);
     

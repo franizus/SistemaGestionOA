@@ -160,7 +160,7 @@
                         echo '<input class="form-control" id="usuario" name="usuario" type="text" maxlength="15" placeholder="Usuario" required>';
                         echo '</div>';
                         echo '<div class="col-4">';
-                        echo '<input class="form-control" id="pw" name="pw" type="text" placeholder="Contraseña" required>';
+                        echo '<input class="form-control" id="pw" name="pw" type="password" placeholder="Contraseña" required>';
                         echo '</div>';
                         echo '<div class="col-4">';
                         echo '<input type="hidden" name="nomProf" value="' . $nombre . '">';

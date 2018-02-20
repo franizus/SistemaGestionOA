@@ -41,6 +41,16 @@
                 </ul>
             </li>
             <?php
+                if ( $_SESSION["userType"] != 'admin' ) {
+            ?>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Crear">
+                    <a class="nav-link" href="tools.php">
+                        <i class="fa fa-external-link"></i>
+                        <span class="nav-link-text">Herramientas Adicionales</span>
+                    </a>
+                </li>
+            <?php } ?>
+            <?php
                 if ( $_SESSION["userType"] == 'admin' ) {
             ?>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
