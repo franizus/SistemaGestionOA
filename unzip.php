@@ -7,16 +7,19 @@
     $filepath = 'zip/' . $_POST["zip_path"];
     $name = basename($filepath,".zip");
     $zip = new ZipArchive;
+    $descomp = $_SESSION["userID"] . '-' . $_SESSION["userType"];
+    mkdir("$descomp", 0700);
     if ($zip->open($filepath) === TRUE) {
-        $zip->extractTo("oa/$name");
+        $zip->extractTo("$descomp/$name");
         $zip->close();
-        $sql = "UPDATE objetoaprendizaje SET
-                ruta = :ruta
-                WHERE idOA = :idOA";
+        $sql = "INSERT INTO rutaoa (idUser, idOA, username, rutaoa)
+                VALUES (:idUser, :idOA, :username, :rutaoa)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(
-            ':ruta' => "oa/$name/index.html",
-            ':idOA' => $_POST["id"]));
+            ':idUser' => $_SESSION["userID"],
+            ':idOA' => $_POST["id"],
+            ':username' => $_SESSION["userName"],
+            ':rutaoa' => "$descomp/$name/index.html"));
         $_SESSION["oa"] = "Objeto de Aprendizaje descomprimido correctamente.";
     }
 ?>

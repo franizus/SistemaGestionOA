@@ -187,10 +187,16 @@
             }
 
             echo '<tr>';
-            if ($row['ruta'] != '')
+            $sql = "SELECT * FROM rutaoa WHERE idOA = :idOA AND idUser = :idUser AND username = :userName";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(array(':idOA' => $id, 'idUser' => $_SESSION["userID"], 'userName' => $_SESSION["userName"]));
+            $ruta = '';
+            if ($stmt->rowCount() > 0)
             {
+              $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+              $ruta = $resultado['rutaoa'];
               echo '<td>';
-              echo '<a href="' . $row['ruta'] . '" target="_blank">' . $row['nombre'] . '</a>';
+              echo '<a href="' . $ruta . '" target="_blank">' . $row['nombre'] . '</a>';
               echo '</td>';
             }
             else
@@ -342,12 +348,11 @@
             } else {
               echo '<div class="col-3">';
             }
-            if ($row['ruta'] == '')
+            if ($ruta == '')
             {
               echo '<button type="button" class="btn btn-primary btn-block" onclick="unzip(' . "'" . $row['ruta_zip'] . "', '" . $id . "'" . ')">Descomprimir</button>';
             } else {
               echo '<button type="button" class="btn btn-primary btn-block disabled">Descomprimir</button>';
-
             }
             echo '</div>';
             echo '<div class="col-3">';
@@ -429,7 +434,7 @@
         }
       }
 
-      function unzip(zip_path, id) {
+      function unzip(zip_path, id, name) {
         var formdata = new FormData();
         formdata.append("zip_path", zip_path);
         formdata.append("id", id);

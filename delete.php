@@ -1,20 +1,11 @@
 <?php
     require_once "pdo.php";
+    require_once "delete_files.php";
 
     function deleteOA($filename, $idOA) {
         $name = basename($filename,".zip"); 
         $target = 'oa/' . $name . '/';
-    
-        if(is_dir($target)){
-            $files = glob( $target . '*', GLOB_MARK );
-                
-            foreach( $files as $file )
-            {
-                unlink( $file );
-            }
-              
-            rmdir( $target );
-        }
+        delete_files($target);
     
         $dirZip = 'zip/' . $filename;
         unlink($dirZip);
