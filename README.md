@@ -46,4 +46,4 @@ Para conectar el sistema con la base de datos que acaba de modificar el archivo 
 
 ## Uso del Sistema
 
-Para el correcto uso del sistema se proporciona un [manual de usuario](http://ohmyz.sh/).
+Para el correcto uso del sistema se proporciona un [manual de usuario](https://github.com/franizus/SistemaGestionOA/blob/master/Manual-Usuario.pdf).
